@@ -17,6 +17,7 @@
 		1BD8C258293E5D6300F1B32A /* karmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8C257293E5D6300F1B32A /* karmaTests.swift */; };
 		1BD8C262293E5D6300F1B32A /* karmaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8C261293E5D6300F1B32A /* karmaUITests.swift */; };
 		1BD8C264293E5D6300F1B32A /* karmaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8C263293E5D6300F1B32A /* karmaUITestsLaunchTests.swift */; };
+		1BDFC86B2979D34000B48D3B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1BDFC86A2979D34000B48D3B /* FirebaseAuth */; };
 		1BE74F0029675F5A006ACEF0 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE74EFF29675F5A006ACEF0 /* DashboardViewModel.swift */; };
 		1BE74F0229675F83006ACEF0 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE74F0129675F83006ACEF0 /* DashboardView.swift */; };
 		1BE74F0429676F97006ACEF0 /* ImageUploaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE74F0329676F97006ACEF0 /* ImageUploaderView.swift */; };
@@ -158,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BDFC86B2979D34000B48D3B /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,6 +180,7 @@
 				1BD8C256293E5D6300F1B32A /* karmaTests */,
 				1BD8C260293E5D6300F1B32A /* karmaUITests */,
 				1BD8C244293E5D6100F1B32A /* Products */,
+				1BDFC8692979D34000B48D3B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -278,6 +281,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		1BDFC8692979D34000B48D3B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E335476129586954003444E0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +380,9 @@
 				1BD8C255293E5D6300F1B32A /* PBXTargetDependency */,
 			);
 			name = karmaTests;
+			packageProductDependencies = (
+				1BDFC86A2979D34000B48D3B /* FirebaseAuth */,
+			);
 			productName = karmaTests;
 			productReference = 1BD8C253293E5D6300F1B32A /* karmaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -995,6 +1008,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1BDFC86A2979D34000B48D3B /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E3521601293F51B20074B787 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
 		E3521602293F51B30074B787 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E3521601293F51B20074B787 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
