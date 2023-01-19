@@ -28,9 +28,14 @@ final class karmaTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        //self.measure {
             // Put the code you want to measure the time of here.
-        }
+        //}
+    }
+    
+    func testRandom () throws{
+        let sut = AuthViewModel()
+        sut.register(withEmail: "example@gmail.com", password: "example", fullname: "example", username: "example")
     }
 
 }

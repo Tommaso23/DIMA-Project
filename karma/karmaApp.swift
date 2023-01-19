@@ -7,11 +7,11 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestore
 import FirebaseAuth
 
 @main
 struct karmaApp: App {
-    
     @StateObject var viewModel = AuthViewModel()
     
     
@@ -21,16 +21,23 @@ struct karmaApp: App {
         // initialization for testing, using emulators
         #if EMULATORS
         print(">> Testing on Emulators <<")
-        Auth.auth().useEmulator(withHost: "localhost", port: 9099)
+        Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
+        //Firestore.firestore().useEmulator(withHost: "127.0.0.1", port: 8080)
         let settings = Firestore.firestore().settings
-        settings.host = "localhost:8080"
+        settings.host = "127.0.0.1:8080"
         settings.isPersistenceEnabled = false
         settings.isSSLEnabled = false
         Firestore.firestore().settings = settings
         #elseif DEBUG
         print(">> Testing on Firebase Server <<")
         #endif
-        
+
+    }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication
+                       .LaunchOptionsKey: Any]?) -> Bool {
+      FirebaseApp.configure()
+      return true
     }
     
     var body: some Scene {

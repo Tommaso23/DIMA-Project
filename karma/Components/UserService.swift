@@ -5,6 +5,7 @@
 //  Created by Tommaso Bucaioni on 27/12/22.
 //
 import Firebase
+import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct UserService {

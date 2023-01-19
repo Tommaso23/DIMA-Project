@@ -5,12 +5,15 @@
     //  Created by Giovanni Demasi on 05/12/22.
     //
 
-    import SwiftUI
+import SwiftUI
+import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 
 struct ContentView: View {
     
     @EnvironmentObject var viewModel: AuthViewModel
-    
+
     //@State var selectedTab: Tabs = .search
     
     var body: some View {
