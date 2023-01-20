@@ -19,7 +19,7 @@ final class karmaTests: XCTestCase {
         iteration += 1
         print(">> Testing on Emulators <<")
 #endif
-        if(iteration == 1){
+        if(iteration == 0){
             FirebaseApp.configure()
             Auth.auth().useEmulator(withHost: "localhost", port: 9099)
             //Firestore.firestore().useEmulator(withHost: "127.0.0.1", port: 8080)
@@ -51,8 +51,8 @@ final class karmaTests: XCTestCase {
     }
     
     func testRandom () throws{
-        let sut = AuthViewModel()
-        sut.register(withEmail: "example@gmail.com", password: "example", fullname: "example", username: "example")
+        let sut = karma.AuthViewModel()
+        sut.register(withEmail: "example11@gmail.com", password: "example", fullname: "example", username: "example")
         XCTAssertEqual(sut.didAuthenticateUser, false)
     }
     

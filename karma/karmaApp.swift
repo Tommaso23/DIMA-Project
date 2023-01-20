@@ -18,21 +18,21 @@ struct karmaApp: App {
     
     
     init() {
-        //        // Firebase configurtion is always executed
-        //        FirebaseApp.configure()
-        //        // initialization for testing, using emulators
-        //        #if EMULATORS
-        //        print(">> Testing on Emulators <<")
-        //        Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
-        //        //Firestore.firestore().useEmulator(withHost: "127.0.0.1", port: 8080)
-        //        let settings = Firestore.firestore().settings
-        //        settings.host = "127.0.0.1:8080"
-        //        settings.isPersistenceEnabled = false
-        //        settings.isSSLEnabled = false
-        //        Firestore.firestore().settings = settings
-#if DEBUG
+                // Firebase configurtion is always executed
+                FirebaseApp.configure()
+                // initialization for testing, using emulators
+                #if EMULATORS
+                print(">> Testing on Emulators <<")
+                Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
+                //Firestore.firestore().useEmulator(withHost: "127.0.0.1", port: 8080)
+                let settings = Firestore.firestore().settings
+                settings.host = "127.0.0.1:8080"
+                settings.isPersistenceEnabled = false
+                settings.isSSLEnabled = false
+                Firestore.firestore().settings = settings
+#elseif DEBUG
         print(">> Testing on Firebase Server <<")
-        FirebaseApp.configure()
+        //FirebaseApp.configure()
 #endif
         
     }
