@@ -55,6 +55,8 @@
 		1B6AA2722979E91D00213BB5 /* CollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E334CDBA295D93E80082FC17 /* CollectionService.swift */; };
 		1B6AA2732979E91D00213BB5 /* PaymentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32FE35E296429630061C907 /* PaymentService.swift */; };
 		1B6B3146294520A000779BBE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6B3145294520A000779BBE /* ContentView.swift */; };
+		1BBD70F62979F33500FBF636 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1BBD70F52979F33500FBF636 /* FirebaseFirestoreSwift */; };
+		1BBD70F82979F33C00FBF636 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1BBD70F72979F33C00FBF636 /* Kingfisher */; };
 		1BCB44C42969E27300205BC1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB44C32969E27300205BC1 /* MainView.swift */; };
 		1BD8C247293E5D6100F1B32A /* karmaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8C246293E5D6100F1B32A /* karmaApp.swift */; };
 		1BD8C24B293E5D6200F1B32A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BD8C24A293E5D6200F1B32A /* Assets.xcassets */; };
@@ -207,6 +209,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BBD70F82979F33C00FBF636 /* Kingfisher in Frameworks */,
+				1BBD70F62979F33500FBF636 /* FirebaseFirestoreSwift in Frameworks */,
 				1BDFC86B2979D34000B48D3B /* FirebaseAuth in Frameworks */,
 				1BDFC86F2979D3D600B48D3B /* FirebaseAppCheck in Frameworks */,
 				1BDFC86D2979D39700B48D3B /* FirebaseFirestore in Frameworks */,
@@ -436,6 +440,8 @@
 				1BDFC86C2979D39700B48D3B /* FirebaseFirestore */,
 				1BDFC86E2979D3D600B48D3B /* FirebaseAppCheck */,
 				1BDFC8702979D3FE00B48D3B /* FirebaseFunctions */,
+				1BBD70F52979F33500FBF636 /* FirebaseFirestoreSwift */,
+				1BBD70F72979F33C00FBF636 /* Kingfisher */,
 			);
 			productName = karmaTests;
 			productReference = 1BD8C253293E5D6300F1B32A /* karmaTests.xctest */;
@@ -1107,6 +1113,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1BBD70F52979F33500FBF636 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E3521601293F51B20074B787 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		1BBD70F72979F33C00FBF636 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E36EFC4E295ED26B00301ED4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		1BDFC86A2979D34000B48D3B /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E3521601293F51B20074B787 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
