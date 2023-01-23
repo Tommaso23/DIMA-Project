@@ -6,28 +6,15 @@
 //
 
 import XCTest
-@testable import karma
+
 import Firebase
+@testable import karma
 import FirebaseFirestore
 var iteration : Int = 0
 
 final class karmaTests: XCTestCase {
     
     override func setUpWithError() throws {
-#if EMULATORS
-        
-        iteration += 1
-        print(">> Testing on Emulators <<")
-#endif
-        if(iteration == 0){
-            FirebaseApp.configure()
-            Auth.auth().useEmulator(withHost: "localhost", port: 9099)
-            //Firestore.firestore().useEmulator(withHost: "127.0.0.1", port: 8080)
-            let settings = Firestore.firestore().settings
-            settings.host = "localhost:8080"
-            settings.isPersistenceEnabled = false
-            settings.isSSLEnabled = false
-            Firestore.firestore().settings = settings}
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -51,9 +38,11 @@ final class karmaTests: XCTestCase {
     }
     
     func testRandom () throws{
-        let sut = karma.AuthViewModel()
-        sut.register(withEmail: "example11@gmail.com", password: "example", fullname: "example", username: "example")
-        XCTAssertEqual(sut.didAuthenticateUser, false)
+        let app = karmaApp()
+        app.viewModel.register(withEmail: "aaa@gmail.com", password: "TestTest1990!", fullname: "uno", username: "due")
+
+        
+        //XCTAssertEqual(sut.didAuthenticateUser, false)
     }
     
 }

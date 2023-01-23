@@ -23,6 +23,7 @@ struct CollectionService {
                      "participants": 0,
                      "timestamp": Timestamp(date: Date())] as [String : Any]
         
+
         Firestore.firestore().collection("collections").document()
             .setData(data) { error in
                 if let error = error {

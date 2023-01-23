@@ -10,7 +10,7 @@ import Firebase
 import FirebaseFirestore
 
 class AuthViewModel: ObservableObject {
-    
+
     //to store the user session
     @Published var userSession: FirebaseAuth.User?
     @Published var didAuthenticateUser = false
@@ -20,15 +20,15 @@ class AuthViewModel: ObservableObject {
     
     init() {
         self.userSession = Auth.auth().currentUser
-        self.fetchUser() 
-        
+        self.fetchUser()
     }
     
     /*func login(withEmail email: String, password: String) {
-        print("DEBUG: login with email \(email)")
-    }*/
+     print("DEBUG: login with email \(email)")
+     }*/
     
     func register(withEmail email: String, password: String, fullname: String, username: String) {
+        
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             //check if an error happens
             if let error = error {
@@ -36,9 +36,11 @@ class AuthViewModel: ObservableObject {
                 return
             }
             
+            
             guard let user = result?.user else { return }
             self.tempUserSession = user
             self.fetchUser()
+            
             
             
             //dictionary for backend infos
@@ -47,13 +49,13 @@ class AuthViewModel: ObservableObject {
                         "fullname": fullname,
                         "uid": user.uid]
             
+            
             Firestore.firestore().collection("users")
                 .document(user.uid)
                 .setData(data) { _ in
                     self.didAuthenticateUser = true
                 }
         }
-    
     }
     
     func signOut() {
@@ -85,4 +87,5 @@ class AuthViewModel: ObservableObject {
                 }
         }
     }
+    
 }
