@@ -13,13 +13,16 @@ import FirebaseFirestore
 var iteration : Int = 0
 
 final class karmaTests: XCTestCase {
+    var authVM : AuthViewModel!
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        self.authVM = AuthViewModel()
     }
     
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        self.authVM = nil
     }
     
     func testExample() throws {
@@ -38,8 +41,7 @@ final class karmaTests: XCTestCase {
     }
     
     func testRandom () throws{
-        let app = karmaApp()
-        app.viewModel.register(withEmail: "aaa@gmail.com", password: "TestTest1990!", fullname: "uno", username: "due")
+        self.authVM.register(withEmail: "aaa@gmail.com", password: "TestTest1990!", fullname: "uno", username: "due")
 
         
         //XCTAssertEqual(sut.didAuthenticateUser, false)

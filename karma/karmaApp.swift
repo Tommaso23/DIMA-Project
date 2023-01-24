@@ -19,19 +19,28 @@ struct karmaApp: App {
     init() {
         // Firebase configurtion is always executed
         FirebaseApp.configure()
-        // initialization for testing, using emulators
-#if EMULATORS
-        print(">> Testing on Emulators <<")
-        Auth.auth().useEmulator(withHost: "localhost", port: 9099)
-        let settings = Firestore.firestore().settings
-        settings.host = "localhost:8080"
-        settings.isPersistenceEnabled = false
-        settings.isSSLEnabled = false
-        Firestore.firestore().settings = settings
-#elseif DEBUG
-        print(">> Testing on Firebase Server <<")
-#endif
-        
+//        // initialization for testing, using emulators
+//#if EMULATORS
+//        print(">> Testing on Emulators <<")
+//        Auth.auth().useEmulator(withHost: "localhost", port: 9099)
+//        let settings = Firestore.firestore().settings
+//        settings.host = "localhost:8080"
+//        settings.isPersistenceEnabled = false
+//        settings.isSSLEnabled = false
+//        Firestore.firestore().settings = settings
+//#elseif DEBUG
+//        print(">> Testing on Firebase Server <<")
+//#endif
+        // Checking if unit tests are running
+        if ProcessInfo.processInfo.environment["unit_tests"] == "true" {
+          print("Setting up Firebase emulator localhost:8080")
+          Auth.auth().useEmulator(withHost: "localhost", port: 9099)
+          let settings = Firestore.firestore().settings
+          settings.host = "localhost:8080"
+          settings.isPersistenceEnabled = false
+          settings.isSSLEnabled = false
+          Firestore.firestore().settings = settings
+        }
     }
     
     var body: some Scene {
