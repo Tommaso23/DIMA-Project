@@ -18,7 +18,6 @@ struct karmaApp: App {
     
     init() {
         // Firebase configurtion is always executed
-        FirebaseApp.configure()
 //        // initialization for testing, using emulators
 //#if EMULATORS
 //        print(">> Testing on Emulators <<")
@@ -31,6 +30,7 @@ struct karmaApp: App {
 //#elseif DEBUG
 //        print(">> Testing on Firebase Server <<")
 //#endif
+        FirebaseApp.configure()
         // Checking if unit tests are running
         if ProcessInfo.processInfo.environment["unit_tests"] == "true" {
           print("Setting up Firebase emulator localhost:8080")

@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
+import FirebaseCore
 import FirebaseFirestore
 
 class AuthViewModel: ObservableObject {
@@ -17,8 +19,10 @@ class AuthViewModel: ObservableObject {
     private let service = UserService()
     @Published var currentUser: User?
     private var tempUserSession: FirebaseAuth.User?
+
     
     init() {
+
         self.userSession = Auth.auth().currentUser
         self.fetchUser()
     }

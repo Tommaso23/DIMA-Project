@@ -7,10 +7,8 @@
 
 import XCTest
 
-import Firebase
 @testable import karma
-import FirebaseFirestore
-var iteration : Int = 0
+
 
 final class karmaTests: XCTestCase {
     var authVM : AuthViewModel!
@@ -44,7 +42,7 @@ final class karmaTests: XCTestCase {
         self.authVM.register(withEmail: "aaa@gmail.com", password: "TestTest1990!", fullname: "uno", username: "due")
 
         
-        //XCTAssertEqual(sut.didAuthenticateUser, false)
+        XCTAssertEqual(authVM.didAuthenticateUser, false)
     }
     
 }
