@@ -19,10 +19,8 @@ class AuthViewModel: ObservableObject {
     private let service = UserService()
     @Published var currentUser: User?
     private var tempUserSession: FirebaseAuth.User?
-
     
     init() {
-
         self.userSession = Auth.auth().currentUser
         self.fetchUser()
     }
@@ -52,7 +50,6 @@ class AuthViewModel: ObservableObject {
                         "username": username.lowercased(),
                         "fullname": fullname,
                         "uid": user.uid]
-            
             
             Firestore.firestore().collection("users")
                 .document(user.uid)

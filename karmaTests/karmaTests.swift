@@ -8,19 +8,38 @@
 import XCTest
 
 @testable import karma
-
+import Firebase
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 final class karmaTests: XCTestCase {
     var authVM : AuthViewModel!
+    var collService : UploadCollectionViewModel!
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        self.authVM = AuthViewModel()
+        super.setUp()
+//        let appOptions = FirebaseOptions(
+//                    googleAppID: "1:774454406954:ios:29b746b4e87fd351677853",
+//                    gcmSenderID: "774454406954"
+//                )
+//                appOptions.apiKey = "AIzaSyBNJrBaHVFFDFz-pIiUrgXmmIfNFUTmg6I"
+//                appOptions.projectID = "dima-project-7bd5f"
+        FirebaseApp.configure()
+        Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
+        //Firestore.firestore().useEmulator(withHost: "127.0.0.1", port: 8080)
+        let settings = Firestore.firestore().settings
+        settings.host = "127.0.0.1:8080"
+        settings.isPersistenceEnabled = false
+        settings.isSSLEnabled = false
+        Firestore.firestore().settings = settings
+        authVM = AuthViewModel()
+        collService = UploadCollectionViewModel()
     }
     
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        self.authVM = nil
     }
     
     func testExample() throws {
@@ -39,10 +58,11 @@ final class karmaTests: XCTestCase {
     }
     
     func testRandom () throws{
-        self.authVM.register(withEmail: "aaa@gmail.com", password: "TestTest1990!", fullname: "uno", username: "due")
+        AuthViewModel().register(withEmail: "ibdni@gmail.com", password: "Pasbobs122221!", fullname: "ksndin", username: "knnq")
+        collService.uploadCollection(withTitle: "Title", withCaption: "Capti", withAmount: 2000, withImage: UIImage())
+    
 
-        
-        XCTAssertEqual(authVM.didAuthenticateUser, false)
+        XCTAssertEqual(authVM.didAuthenticateUser, true)
     }
     
 }

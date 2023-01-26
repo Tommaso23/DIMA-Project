@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B61AEFD2982C99600429130 /* FirebaseAuthMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B61AEFC2982C99600429130 /* FirebaseAuthMock.swift */; };
+		1B61AEFF2982C9A500429130 /* MockFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B61AEFE2982C9A500429130 /* MockFirebase.swift */; };
+		1B61AF022982CEED00429130 /* FirebaseAuthProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B61AF012982CEED00429130 /* FirebaseAuthProtocol.swift */; };
+		1B61AF042982D62800429130 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 1B61AF032982D62800429130 /* FirebaseAppCheck */; };
+		1B61AF062982D63700429130 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1B61AF052982D63700429130 /* FirebaseDatabase */; };
+		1B61AF082982D63700429130 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B61AF072982D63700429130 /* FirebaseDatabaseSwift */; };
+		1B61AF0A29830BE700429130 /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = 1B61AF0929830BE700429130 /* FirebaseInstallations */; };
 		1B658DBC293F428C00DF06DB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B658DBB293F428C00DF06DB /* LoginView.swift */; };
 		1B658DBE293F439B00DF06DB /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B658DBD293F439B00DF06DB /* LoginViewModel.swift */; };
 		1B6AA2472979E39300213BB5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E378A41E2940E29A001CE2E2 /* AuthViewModel.swift */; };
@@ -136,6 +143,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B61AEFC2982C99600429130 /* FirebaseAuthMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthMock.swift; sourceTree = "<group>"; };
+		1B61AEFE2982C9A500429130 /* MockFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFirebase.swift; sourceTree = "<group>"; };
+		1B61AF012982CEED00429130 /* FirebaseAuthProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthProtocol.swift; sourceTree = "<group>"; };
 		1B658DBB293F428C00DF06DB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		1B658DBD293F439B00DF06DB /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		1B6B3145294520A000779BBE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -836,10 +846,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B61AF082982D63700429130 /* FirebaseDatabaseSwift in Frameworks */,
 				1BBD70F82979F33C00FBF636 /* Kingfisher in Frameworks */,
 				1BBD70F62979F33500FBF636 /* FirebaseFirestoreSwift in Frameworks */,
+				1B61AF0A29830BE700429130 /* FirebaseInstallations in Frameworks */,
 				1BDFC86B2979D34000B48D3B /* FirebaseAuth in Frameworks */,
 				1B6E9351297FD9210017A9B8 /* FirebaseStorage in Frameworks */,
+				1B61AF042982D62800429130 /* FirebaseAppCheck in Frameworks */,
+				1B61AF062982D63700429130 /* FirebaseDatabase in Frameworks */,
 				1BE6167B297B282400BE9070 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -854,6 +868,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B61AEFB2982C98700429130 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				1B61AEFC2982C99600429130 /* FirebaseAuthMock.swift */,
+				1B61AEFE2982C9A500429130 /* MockFirebase.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		1B61AF002982CEC500429130 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1B61AF012982CEED00429130 /* FirebaseAuthProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		1BD8C23A293E5D6100F1B32A = {
 			isa = PBXGroup;
 			children = (
@@ -887,6 +918,8 @@
 				1BD8C274293E5DE300F1B32A /* Views */,
 				1BD8C272293E5DCB00F1B32A /* Models */,
 				1BD8C271293E5DB800F1B32A /* Services */,
+				1B61AEFB2982C98700429130 /* Mocks */,
+				1B61AF002982CEC500429130 /* Protocols */,
 				1BD8C246293E5D6100F1B32A /* karmaApp.swift */,
 				1BD8C24A293E5D6200F1B32A /* Assets.xcassets */,
 				E35215FF293F4F900074B787 /* GoogleService-Info.plist */,
@@ -1692,6 +1725,10 @@
 				1BBD70F72979F33C00FBF636 /* Kingfisher */,
 				1BE6167A297B282400BE9070 /* FirebaseFirestore */,
 				1B6E9350297FD9210017A9B8 /* FirebaseStorage */,
+				1B61AF032982D62800429130 /* FirebaseAppCheck */,
+				1B61AF052982D63700429130 /* FirebaseDatabase */,
+				1B61AF072982D63700429130 /* FirebaseDatabaseSwift */,
+				1B61AF0929830BE700429130 /* FirebaseInstallations */,
 			);
 			productName = karmaTests;
 			productReference = 1BD8C253293E5D6300F1B32A /* karmaTests.xctest */;
@@ -1798,7 +1835,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E34C9B2D2966F03100E8FC5E /* SearchBar.swift in Sources */,
+				1B61AF022982CEED00429130 /* FirebaseAuthProtocol.swift in Sources */,
 				E3354771295B05A3003444E0 /* UserService.swift in Sources */,
+				1B61AEFD2982C99600429130 /* FirebaseAuthMock.swift in Sources */,
 				1BCB44C42969E27300205BC1 /* MainView.swift in Sources */,
 				E335476529586BDD003444E0 /* RecentActivityView.swift in Sources */,
 				E36EFC52295EE12100301ED4 /* CollectionViewModel.swift in Sources */,
@@ -1806,6 +1845,7 @@
 				E32FE35A29641C850061C907 /* PaymentHandler.swift in Sources */,
 				E33547672959AB64003444E0 /* CollectionView.swift in Sources */,
 				E3713E3B2967440F0037063C /* TextArea.swift in Sources */,
+				1B61AEFF2982C9A500429130 /* MockFirebase.swift in Sources */,
 				E34C9B232964AB4E00E8FC5E /* SummaryCollectionView.swift in Sources */,
 				1BE74F0029675F5A006ACEF0 /* DashboardViewModel.swift in Sources */,
 				E34C9B272966EA0700E8FC5E /* SearchView.swift in Sources */,
@@ -2023,7 +2063,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = NO;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = karma/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
@@ -2240,7 +2282,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = NO;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = karma/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
@@ -2261,7 +2305,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = NO;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = karma/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
@@ -2375,6 +2421,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1B61AF032982D62800429130 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E3521601293F51B20074B787 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		1B61AF052982D63700429130 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E3521601293F51B20074B787 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		1B61AF072982D63700429130 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E3521601293F51B20074B787 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		1B61AF0929830BE700429130 /* FirebaseInstallations */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E3521601293F51B20074B787 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseInstallations;
+		};
 		1B6E9350297FD9210017A9B8 /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E3521601293F51B20074B787 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
