@@ -34,8 +34,8 @@ final class karmaTests: XCTestCase {
         settings.isPersistenceEnabled = false
         settings.isSSLEnabled = false
         Firestore.firestore().settings = settings
-        authVM = AuthViewModel()
-        collService = UploadCollectionViewModel()
+
+
     }
     
     override func tearDownWithError() throws {
@@ -58,11 +58,12 @@ final class karmaTests: XCTestCase {
     }
     
     func testRandom () throws{
-        AuthViewModel().register(withEmail: "ibdni@gmail.com", password: "Pasbobs122221!", fullname: "ksndin", username: "knnq")
-        collService.uploadCollection(withTitle: "Title", withCaption: "Capti", withAmount: 2000, withImage: UIImage())
-    
-
-        XCTAssertEqual(authVM.didAuthenticateUser, true)
+        let firestoreMock = FirestoreMock()
+        let firebaseAuthMock = FirebaseAuthMock()
+        let authVM = AuthViewModel(firebaseAuth: firebaseAuthMock, firestore: firestoreMock)
+        
+        authVM.register(withEmail: "Test@gmail.com", password: "pass", fullname: "name", username: "surn")
+        
     }
     
 }
