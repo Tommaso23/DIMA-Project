@@ -15,6 +15,7 @@ import FirebaseFirestoreSwift
 
 final class karmaTests: XCTestCase {
     var uploadCollectionVM : UploadCollectionViewModel!
+    var collectionVM : CollectionViewModel!
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -58,6 +59,10 @@ final class karmaTests: XCTestCase {
     
     func testRandom () throws{
         uploadCollectionVM.uploadCollection(withTitle: "Title", withCaption: "Caption", withAmount: 20000, withImage: UIImage())
+        var collection = Collection(title: "11", caption: "11", amount: 233, currentAmount: 0, favourites: 0, participants: 1, collectionImageUrl: "", timestamp: Timestamp(), uid: "j")
+        collectionVM = CollectionViewModel(collection: collection, service: CollectionServiceFactory.create())
+        collectionVM.addToFavourite()
+        
     }
     
 }

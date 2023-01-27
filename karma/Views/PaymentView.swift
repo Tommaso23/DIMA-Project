@@ -17,7 +17,7 @@ struct PaymentView: View {
 
     
     init(collection: Collection) {
-        self.viewModel = CollectionViewModel(collection: collection)
+        self.viewModel = CollectionViewModel(collection: collection, service: CollectionServiceFactory.create())
     }
     
     var body: some View {

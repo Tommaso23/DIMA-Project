@@ -11,16 +11,16 @@ import SwiftUI
 
 class CollectionViewModel: ObservableObject {
     
-    private let service = CollectionService()
+    private let service : CollectionServiceProtocol
     @Published var collection: Collection
     @Published private var total: Float = 0.0
     
     let paymentHandler = PaymentHandler()
     @Published var paymentSuccess = false
     
-    
-    init(collection: Collection) {
+    init(collection: Collection, service: CollectionServiceProtocol) {
         self.collection = collection
+        self.service = service
         checkIfUserLikedCollection()
     }
     

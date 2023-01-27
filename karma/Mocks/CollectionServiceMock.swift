@@ -14,7 +14,7 @@ class CollectionServiceMock : CollectionServiceProtocol {
     }
     
     func fetchCollections(completion: @escaping([ Collection]) -> Void){
-        
+
     }
     
     func fetchCollections(forUid uid: String, completion: @escaping([ Collection]) -> Void){
@@ -22,7 +22,7 @@ class CollectionServiceMock : CollectionServiceProtocol {
     }
     
     func addToFavourite(_ collection: Collection, completion: @escaping() -> Void){
-        
+        print("Trying to add a collection to favourites, sorry but I am a mock!")
     }
     
     func checkIfUserlikedCollection(_ collection: Collection, completion: @escaping(Bool) -> Void){
