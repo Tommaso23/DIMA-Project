@@ -8,6 +8,7 @@
 import Foundation
 
 class CollectionServiceMock : CollectionServiceProtocol {
+    var array = [String]()
     
     func uploadCollection(title: String, caption: String, amount: Float, image: String, completion: @escaping(Bool) -> Void){
         print("Tried to upload a collection with the following parameters: " + title + ", " + caption + ", " + String(amount))
@@ -18,7 +19,7 @@ class CollectionServiceMock : CollectionServiceProtocol {
     }
     
     func fetchCollections(forUid uid: String, completion: @escaping([ Collection]) -> Void){
-        
+        print("Nothing to fetch")
     }
     
     func addToFavourite(_ collection: Collection, completion: @escaping() -> Void){

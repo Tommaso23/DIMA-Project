@@ -9,11 +9,12 @@ import Foundation
 
 class ProfileViewModel: ObservableObject {
     @Published var collections = [Collection]()
-    private let service = CollectionService()
+    private let service : CollectionServiceProtocol
     let user: User
     
-    init(user: User) {
+    init(user: User, service: CollectionServiceProtocol) {
         self.user = user
+        self.service = service
         self.fetchUserCollections()
     }
     

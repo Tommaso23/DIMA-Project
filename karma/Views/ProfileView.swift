@@ -22,7 +22,7 @@ struct ProfileView: View {
     @State private var showNewCollectionView = false
     
     init(user: User) {
-        self.viewModel = ProfileViewModel(user: user)
+        self.viewModel = ProfileViewModel(user: user, service: CollectionServiceFactory.create())
     }
     
     var body: some View {
