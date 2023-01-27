@@ -14,8 +14,6 @@ class FirebaseAuthMock {
     private var registeredUsers = [String: String]()
     var current_User: User?
     
-    static var staticInit: (() -> ())?
-    
     func currentUser() -> User? {
         return current_User
     }

@@ -8,3 +8,6 @@
 import Foundation
 import Firebase
 
+protocol FirestoreProtocol {
+    func collection(_ collectionPath: String) -> CollectionReferenceMock
+}

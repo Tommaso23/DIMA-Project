@@ -31,7 +31,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let myEnvObject = AuthViewModel(firebaseAuth: Auth.auth(), firestore: Firestore.firestore())
+        let myEnvObject = AuthViewModel()
         ContentView().environmentObject(myEnvObject)
     }
 }

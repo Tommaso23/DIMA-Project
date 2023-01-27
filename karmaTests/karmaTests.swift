@@ -14,8 +14,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class karmaTests: XCTestCase {
-    var authVM : AuthViewModel!
-    var collService : UploadCollectionViewModel!
+    var uploadCollectionVM : UploadCollectionViewModel!
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -26,16 +25,16 @@ final class karmaTests: XCTestCase {
 //                )
 //                appOptions.apiKey = "AIzaSyBNJrBaHVFFDFz-pIiUrgXmmIfNFUTmg6I"
 //                appOptions.projectID = "dima-project-7bd5f"
-        FirebaseApp.configure()
-        Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
-        //Firestore.firestore().useEmulator(withHost: "127.0.0.1", port: 8080)
-        let settings = Firestore.firestore().settings
-        settings.host = "127.0.0.1:8080"
-        settings.isPersistenceEnabled = false
-        settings.isSSLEnabled = false
-        Firestore.firestore().settings = settings
-
-
+//        FirebaseApp.configure()
+//        Auth.auth().useEmulator(withHost: "127.0.0.1", port: 9099)
+//        //Firestore.firestore().useEmulator(withHost: "127.0.0.1", port: 8080)
+//        let settings = Firestore.firestore().settings
+//        settings.host = "127.0.0.1:8080"
+//        settings.isPersistenceEnabled = false
+//        settings.isSSLEnabled = false
+//        Firestore.firestore().settings = settings
+        
+        uploadCollectionVM = UploadCollectionViewModel(service: CollectionServiceFactory.create())
     }
     
     override func tearDownWithError() throws {
@@ -58,12 +57,7 @@ final class karmaTests: XCTestCase {
     }
     
     func testRandom () throws{
-        let firestoreMock = FirestoreMock()
-        let firebaseAuthMock = FirebaseAuthMock()
-        let authVM = AuthViewModel(firebaseAuth: firebaseAuthMock, firestore: firestoreMock)
-        
-        authVM.register(withEmail: "Test@gmail.com", password: "pass", fullname: "name", username: "surn")
-        
+        uploadCollectionVM.uploadCollection(withTitle: "Title", withCaption: "Caption", withAmount: 20000, withImage: UIImage())
     }
     
 }

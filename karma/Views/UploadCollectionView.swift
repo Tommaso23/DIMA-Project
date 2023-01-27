@@ -21,7 +21,7 @@ struct UploadCollectionView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var viewModel = UploadCollectionViewModel()
+    @ObservedObject var viewModel = UploadCollectionViewModel(service: CollectionServiceFactory.create())
     @EnvironmentObject var collectionVM: CollectionViewModel
     
    

@@ -13,7 +13,7 @@ import FirebaseAuth
 
 @main
 struct karmaApp: App {
-    @StateObject var viewModel = AuthViewModel(firebaseAuth: Auth.auth(), firestore: Firestore.firestore())
+    @StateObject var viewModel = AuthViewModel()
     
     
     init() {

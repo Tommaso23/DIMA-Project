@@ -20,13 +20,14 @@ class AuthViewModel: ObservableObject {
     @Published var currentUser: User?
     private var tempUserSession: FirebaseAuth.User?
     
-    private let firebaseAuth: Auth
-    let firestore: Firestore
+//    private let firebaseAuth: Auth
+//    let firestore: Firestore
     
-    init(firebaseAuth: Auth, firestore: Firestore) {
-        self.firebaseAuth = firebaseAuth
-        self.firestore = firestore
-        self.userSession = firebaseAuth.currentUser
+//    init(firebaseAuth: Auth, firestore: Firestore) {
+    init() {
+//        self.firebaseAuth = firebaseAuth
+//        self.firestore = firestore
+        self.userSession = Auth.auth().currentUser
         self.fetchUser()
     }
     
@@ -36,7 +37,7 @@ class AuthViewModel: ObservableObject {
     
     func register(withEmail email: String, password: String, fullname: String, username: String) {
         
-        firebaseAuth.createUser(withEmail: email, password: password) { result, error in
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
             //check if an error happens
             if let error = error {
                 print("DEBUG: failed to register with error \(error.localizedDescription)")
@@ -56,7 +57,7 @@ class AuthViewModel: ObservableObject {
                         "fullname": fullname,
                         "uid": user.uid]
             
-            self.firestore.collection("users")
+            Firestore.firestore().collection("users")
                 .document(user.uid)
                 .setData(data) { _ in
                     self.didAuthenticateUser = true
@@ -69,7 +70,7 @@ class AuthViewModel: ObservableObject {
         userSession = nil
         
         //signs user out on backend
-        try? firebaseAuth.signOut()
+        try? Auth.auth().signOut()
     }
     
     func fetchUser() {
@@ -83,8 +84,8 @@ class AuthViewModel: ObservableObject {
     func uploadImage(_ image: UIImage) {
         guard let uid = tempUserSession?.uid else { return }
         
-        ImageUploader.uploadImage(image: image) { profileImageUrl in
-            self.firestore.collection("users")
+        ImageUploaderFactory.create().uploadImage(image: image) { profileImageUrl in
+            Firestore.firestore().collection("users")
                 .document(uid)
                 .updateData(["profileImageUrl": profileImageUrl]) { _ in
                     self.userSession = self.tempUserSession
