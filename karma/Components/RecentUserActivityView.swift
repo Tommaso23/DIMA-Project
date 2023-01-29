@@ -57,7 +57,7 @@ struct RecentUserActivityView: View {
                 .foregroundColor(isPositive ? Color.green : Color.red)
                 .padding(.trailing)
         }
-        .frame(width: UIScreen.main.bounds.size.width*0.9, height: 100)
+        .frame(width: 350, height: 100)
         .background(.white)
         .containerShape(RoundedRectangle(cornerRadius: 15))
     }

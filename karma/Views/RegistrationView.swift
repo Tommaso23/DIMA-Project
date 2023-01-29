@@ -13,11 +13,13 @@ struct RegistrationView: View {
     @State private var username = ""
     @State private var email = ""
     @State private var password = ""
+    
     @Environment(\.dismiss) private var dismiss
+    
     @EnvironmentObject var viewModel: AuthViewModel
+    
     @State private var screenHeight = UIScreen.main.bounds.height
     @State private var screenWidth = UIScreen.main.bounds.width
-    
     @State private var orientation = UIDevice.current.orientation
 
     
@@ -138,7 +140,7 @@ struct RegistrationView: View {
             }.detectOrientation($orientation)
         }
         // MARK: iPhone
-        else{
+        else {
             ZStack {
                 VStack {
                     NavigationLink(destination: ImageUploaderView(),

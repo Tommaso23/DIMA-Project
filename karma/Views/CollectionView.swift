@@ -109,7 +109,7 @@ struct CollectionView: View {
             
         }
         .padding()
-        .frame(width: UIScreen.main.bounds.size.width*0.9, height: 230)
+        .frame(width: 360, height: 230)
         .background(Color(.white))
         .clipShape(RoundedRectangle(cornerRadius: 15))
     }
