@@ -198,7 +198,7 @@ struct LoginView: View {
                             .font(.headline)
                             .frame(width: screenWidth*0.8, height: screenHeight * 0.06)
                             .foregroundColor(.white)
-                            .background(.blue)
+                            .background(.black)
                             .cornerRadius(screenHeight*0.02)
                     }
                     

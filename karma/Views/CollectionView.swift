@@ -49,7 +49,7 @@ struct CollectionView: View {
             Text(viewModel.collection.caption)
                 .font(.headline)
                 .fontWeight(.semibold)
-                .foregroundColor(Color(.systemGray2))
+                .foregroundColor(Color(.systemGray))
                 .frame(maxHeight: 80)
             
             HStack {

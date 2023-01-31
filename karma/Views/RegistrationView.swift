@@ -141,7 +141,7 @@ struct RegistrationView: View {
         // MARK: iPhone
         else{
             ZStack {
-                Color.theme.dark
+                Color.theme.custombackg
                 VStack {
                     NavigationLink(destination: ImageUploaderView(),
                                    isActive: $viewModel.didAuthenticateUser,
@@ -157,7 +157,7 @@ struct RegistrationView: View {
                         Text("arma")
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                     }
                     .offset(x: -screenHeight * 0.008)
                     
@@ -167,9 +167,9 @@ struct RegistrationView: View {
                         Text("Sign Up")
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                            .foregroundColor(Color.theme.dark)
-                            .padding(.leading, screenHeight*0.02)
-                            .padding(.bottom, screenHeight*0.04)
+                            .foregroundColor(.black)
+//                            .padding(.leading, screenHeight*0.02)
+//                            .padding(.bottom, screenHeight*0.04)
                     
                     
                     VStack(spacing: screenHeight*0.035) {
@@ -225,13 +225,13 @@ struct RegistrationView: View {
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(width: screenWidth*0.8, height: screenHeight * 0.06)
-                            .background(.blue)
+                            .background(.black)
                             .clipShape(RoundedRectangle(cornerRadius: screenHeight*0.02))
                         
                     }
                     
                     Spacer()
-                        .frame(height: screenHeight * 0.05)
+                        .frame(height: screenHeight * 0.15)
                     
                     Button {
                         dismiss()
@@ -248,8 +248,11 @@ struct RegistrationView: View {
                     .foregroundColor(.black)
                     
                 }
-            }.ignoresSafeArea()
+                .navigationBarBackButtonHidden(true)
+            }
+            .ignoresSafeArea()
         }
+            
     }
     
     func getHeight() -> CGFloat {

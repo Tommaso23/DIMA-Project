@@ -35,13 +35,13 @@ struct MainView: View {
                         let size = $0.size
                         DashboardView(viewModel: DashboardViewModel(), safeArea: safeArea, size: size)
                             .ignoresSafeArea(.container, edges: .top)
-                            .setTabBarBackground(color: Color("BG"))
+                            .setTabBarBackground(color: .black)
                             .tag(Tab.home)
                         
                     }
                     
                     SearchView()
-                        .setTabBarBackground(color: Color("BG"))
+                        .setTabBarBackground(color: .black)
                         .tag(Tab.search)
                     
                     //                    UploadCollectionView()
@@ -51,11 +51,11 @@ struct MainView: View {
 
                     
                     BookmarkView()
-                        .setTabBarBackground(color: Color("BG"))
+                        .setTabBarBackground(color: .black)
                         .tag(Tab.bookmarks)
                     
                     ProfileView(user: user)
-                        .setTabBarBackground(color: Color("BG"))
+                        .setTabBarBackground(color: .black)
                         .tag(Tab.profile)
                 }
                 TabBar()
@@ -127,8 +127,10 @@ struct MainView: View {
             // Custom corner
             CustomCorner(corners: [.topLeft, .topRight], radius: 25)
                 .fill(Color(.white))
+                .border(Color(.systemGray5))
                 .ignoresSafeArea()
         }
+        
     }
     
 }
