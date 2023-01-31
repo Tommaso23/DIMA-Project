@@ -44,12 +44,6 @@ struct MainView: View {
                         .setTabBarBackground(color: .black)
                         .tag(Tab.search)
                     
-                    //                    UploadCollectionView()
-                    //                        .setTabBarBackground(color: Color("BG"))
-                    //                        .tag(Tab.post)
-                    
-
-                    
                     BookmarkView()
                         .setTabBarBackground(color: .black)
                         .tag(Tab.bookmarks)

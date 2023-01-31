@@ -13,16 +13,66 @@ struct DashboardView: View {
     let screenHeight = UIScreen.main.bounds.height
     let screenWidth = UIScreen.main.bounds.width
     
-    
+
+    @State private var orientation = UIDevice.current.orientation
+
 
     // Variables for header
     var safeArea: EdgeInsets
     var size: CGSize
     
     var body: some View {
-        
-        NavigationStack {
-//            ZStack(alignment: .bottomTrailing) {
+        if UIDevice.isIPad {
+            NavigationStack {
+                ZStack {
+                    VStack {
+                    HStack {
+                        Image("kLogo-40")
+                        Text("arma")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                            .offset(x: -4, y: 5)
+                        
+                    }
+                    .padding()
+                    
+                        ScrollView(.vertical, showsIndicators: false) {
+                            
+                            VStack(alignment: .center) {
+                                ForEach(viewModel.collections){ collection in
+                                    NavigationLink(destination: SummaryCollectionView(collection: collection)) {
+                                        iPadMainCollectionView(collection: collection)
+                                            
+                                        
+                                        //.shadow(color: .black.opacity(0.2), radius: 1, x: 6, y: 6)
+                                        //.blur(radius: 8, opaque: false)
+                                        
+                                        
+                                    }
+                                
+                                    Divider().padding(.horizontal)
+                                }
+                                
+                            }
+                            
+                            Spacer().frame(height: 60)
+                        }
+                    }
+                    .background(Color.white)
+                    .refreshable {
+                        viewModel.updateHome()
+                    }
+                    
+                }
+            }
+            .onTapGesture {
+                hideTabBar()
+                
+            }
+        } else {
+            NavigationStack {
+                //            ZStack(alignment: .bottomTrailing) {
                 ZStack(alignment: .top) {
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack {
@@ -36,7 +86,7 @@ struct DashboardView: View {
                                 ForEach(viewModel.collections){ collection in
                                     NavigationLink(destination: SummaryCollectionView(collection: collection)) {
                                         MainCollectionView(collection: collection)
-
+                                        
                                         //.shadow(color: .black.opacity(0.2), radius: 1, x: 6, y: 6)
                                         //.blur(radius: 8, opaque: false)
                                         
@@ -58,10 +108,12 @@ struct DashboardView: View {
                     }
                     
                 }
-        }
-        .onTapGesture {
-            hideTabBar()
-
+            }
+            .onTapGesture {
+                hideTabBar()
+                
+            }
+            
         }
     }
     

@@ -13,7 +13,6 @@ import FirebaseFirestore
 struct CollectionView: View {
     @ObservedObject var viewModel: CollectionViewModel
     
-    @State private var showSummaryCollection = false
     
     //    private var percentage: Float = 0.0
 //    private let numberFormatter: NumberFormatter
