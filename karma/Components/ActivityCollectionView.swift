@@ -49,7 +49,7 @@ struct ActivityCollectionView: View {
                 
         }
         .frame(width: UIScreen.main.bounds.size.width*0.9, height: 100)
-        .background(Color(.white))
+        .background(Color.theme.custombackg)
         .containerShape(RoundedRectangle(cornerRadius: 15))
     }
 }

@@ -27,10 +27,8 @@ struct SummaryCollectionView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
-                Color.theme.custombackg.ignoresSafeArea()
                 ScrollView {
                     VStack {
-                        //                    GeometryReader { g in
                         HStack {
                             Spacer()
                             VStack {
@@ -88,7 +86,7 @@ struct SummaryCollectionView: View {
                                 .fontWeight(.semibold)
                                 .frame(minWidth: 100, maxWidth: 250)
                                 .frame(height: 45)
-                                .background(Color(.systemBlue))
+                                .background(.black)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                             
                         }

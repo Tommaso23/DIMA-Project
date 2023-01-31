@@ -22,7 +22,7 @@ struct DashboardView: View {
     var body: some View {
         
         NavigationStack {
-            ZStack(alignment: .bottomTrailing) {
+//            ZStack(alignment: .bottomTrailing) {
                 ZStack(alignment: .top) {
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack {
@@ -58,13 +58,10 @@ struct DashboardView: View {
                     }
                     
                 }
-                
-
-            }
         }
         .onTapGesture {
             hideTabBar()
-            //                                    withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.7, blendDuration: 0.7))
+
         }
     }
     

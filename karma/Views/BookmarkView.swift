@@ -14,7 +14,6 @@ struct BookmarkView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.theme.custombackg.ignoresSafeArea()
                 VStack {
                     HStack {
                         Text("Favourites")

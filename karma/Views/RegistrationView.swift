@@ -25,6 +25,7 @@ struct RegistrationView: View {
         if UIDevice.isIPad{
             Group{
                 ZStack {
+                    Color.black
                     VStack(alignment: .center, spacing: getHeight() * 0.03) {
                         NavigationLink(destination: ImageUploaderView(),
                                        isActive: $viewModel.didAuthenticateUser,
@@ -38,7 +39,7 @@ struct RegistrationView: View {
                             Text("arma")
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
-                                .foregroundColor(Color.theme.dark)
+                                .foregroundColor(.white)
                         }
                         .offset(x: -getHeight()*0.01)
                     
@@ -51,7 +52,7 @@ struct RegistrationView: View {
                             Text("Sign Up")
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
-                                .foregroundColor(Color.theme.dark)
+                                .foregroundColor(.white)
                         }
                         
                         if !orientation.isLandscape{
@@ -140,6 +141,7 @@ struct RegistrationView: View {
         // MARK: iPhone
         else{
             ZStack {
+                Color.theme.dark
                 VStack {
                     NavigationLink(destination: ImageUploaderView(),
                                    isActive: $viewModel.didAuthenticateUser,
@@ -150,11 +152,12 @@ struct RegistrationView: View {
                     HStack {
                         Image("kLogo-40")
                             .offset(x: screenHeight * 0.01, y: -screenHeight * 0.009)
+                            .foregroundColor(.white)
                         
                         Text("arma")
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                            .foregroundColor(Color.theme.dark)
+                            .foregroundColor(.white)
                     }
                     .offset(x: -screenHeight * 0.008)
                     
@@ -268,8 +271,8 @@ struct RegistrationView: View {
     }
 }
 
-struct RegistrationView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegistrationView()
-    }
-}
+//struct RegistrationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RegistrationView()
+//    }
+//}
