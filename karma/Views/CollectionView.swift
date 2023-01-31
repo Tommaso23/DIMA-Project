@@ -108,7 +108,7 @@ struct CollectionView: View {
             
         }
         .padding()
-        .frame(width: UIScreen.main.bounds.size.width*0.9, height: 230)
+        .frame(width: UIDevice.isIPad ? 310 : 350, height: 230)
         .background(Color.theme.custombackg)
         .clipShape(RoundedRectangle(cornerRadius: 15))
     }

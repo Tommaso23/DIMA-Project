@@ -10,6 +10,8 @@ import Kingfisher
 import FirebaseFirestore
 
 struct iPadMainCollectionView: View {
+    
+    @State private var orientation = UIDevice.current.orientation
 
     let collection: Collection
     
