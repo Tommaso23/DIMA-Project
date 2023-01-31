@@ -42,120 +42,92 @@ struct ProfileView: View {
                                     .scaledToFill()
                                     .clipShape(Circle())
                                     .frame(width: 100, height: 100)
-                                //                                            .onReceive(self.time) { (_) in
-                                //                                                let y = g.frame(in: .global).minY
-                                //                                                if -y > (UIScreen.main.bounds.height * 0.16) - 50 {
-                                //                                                    withAnimation {
-                                //                                                        self.showHeaderBar = true
-                                //                                                    }
-                                //                                                } else {
-                                //                                                    withAnimation {
-                                //                                                        self.showHeaderBar = false
-                                //                                                    }
-                                //                                                }
-                                //                                        }
-                                
-                                Spacer()
                             }
                             
-                            
-                            Text("\(viewModel.user.username)")
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                            
+                            Spacer()
                         }
-                        .padding(.bottom, 24)
                         
-                    }
-                    //                            .frame(height: UIScreen.main.bounds.height / 4.3)
-                    
-                    statsView
-                    
-                    Divider()
-                    
-                    CollView
-
-                    
-                    RecentActivitiesView
-                    
-                }
-            }
-            //                    .background(Color.theme.custombackg)
-            .refreshable {
-                viewModel.fetchUserCollections()
-                viewModel.fetchPayments()
-                viewModel.fetchUser()
-            }
-            .toolbar {
-                ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image(systemName: "chevron.backward")
+                        
+                        Text("\(viewModel.user.username)")
+                            .font(.title2)
                             .fontWeight(.semibold)
-                    })
-                }
-                
-                ToolbarItem(placement: ToolbarItemPlacement.principal) {
-                    
-                    Text(viewModel.user.fullname)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    
-                }
-                if viewModel.user.id == authViewModel.currentUser?.id {
-                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
-                        Menu {
-                            NavigationLink {
-                                EditProfileView(user: viewModel.user)
-                            } label: {
-                                Label("Edit profile", systemImage: "pencil")
-                            }
-                            
-                            Button(
-                                role: .destructive,
-                                action: {
-                                    authViewModel.signOut()
-                                }, label: {
-                                    Label("Sign out", systemImage: "rectangle.portrait.and.arrow.right")
-                                }
-                            )
-                            
-                        } label: {
-                            Label (
-                                title: { Text("Add") },
-                                icon: { Image(systemName: "ellipsis") }
-                            )
-                        }
                         
                     }
+                    .padding(.bottom, 24)
+                    
                 }
                 
+                statsView
+                
+                Divider()
+                
+                CollView
+                
+                
+                RecentActivitiesView
+                
             }
-            .navigationBarBackButtonHidden(true)
-            .foregroundColor(.black)
+        }
+        .refreshable {
+            viewModel.fetchUserCollections()
+            viewModel.fetchPayments()
+            viewModel.fetchUser()
+        }
+        .toolbar {
+            ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "chevron.backward")
+                        .fontWeight(.semibold)
+                        .foregroundColor((viewModel.user.id == authViewModel.currentUser?.id) ? .white : .black)
+                })
+            }
             
-            //                if self.showHeaderBar {
-            //                    HStack {
-            //                        Spacer()
-            //                        Text(viewModel.user.username)
-            //                            .font(.title3)
-            //                            .fontWeight(.bold)
-            //                        Spacer()
-            //                    }
-            //                    .padding(.bottom)
-            //                    .background(Color.theme.custombackg)
-            //                }
-            
+            ToolbarItem(placement: ToolbarItemPlacement.principal) {
+                
+                Text(viewModel.user.fullname)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                
+            }
+            if viewModel.user.id == authViewModel.currentUser?.id {
+                ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
+                    Menu {
+                        NavigationLink {
+                            EditProfileView(user: viewModel.user)
+                        } label: {
+                            Label("Edit profile", systemImage: "pencil")
+                        }
+                        
+                        Button(
+                            role: .destructive,
+                            action: {
+                                authViewModel.signOut()
+                            }, label: {
+                                Label("Sign out", systemImage: "rectangle.portrait.and.arrow.right")
+                            }
+                        )
+                        
+                    } label: {
+                        Label (
+                            title: { Text("Add") },
+                            icon: { Image(systemName: "ellipsis") }
+                        )
+                    }
+                    
+                }
+            }
             
         }
-        .onTapGesture {
-            hideTabBar()
-        }
+        .navigationBarBackButtonHidden(true)
+        .foregroundColor(.black)
         
     }
+    
 }
-//}
+
+
 
 
 
@@ -168,14 +140,6 @@ struct ProfileView_Previews: PreviewProvider {
             profileImageUrl: "",
             email: "tbucaioni@virgilio.it"))
         .previewDevice("iPhone 12")
-        
-        //        ProfileView(user: User(
-        //            id: NSUUID().uuidString,
-        //            username: "tombucaioni",
-        //            fullname: "Tommaso Bucaioni",
-        //            profileImageUrl: "",
-        //            email: "tbucaioni@virgilio.it"))
-        //        .previewDevice("iPad (10th generation)")
     }
 }
 
@@ -214,7 +178,7 @@ extension ProfileView {
     var CollView: some View {
         VStack(alignment: .center) {
             HStack {
-                Text("Raccolte")
+                Text("Collections")
                     .font(.title2)
                     .fontWeight(.semibold)
                 
@@ -262,7 +226,7 @@ extension ProfileView {
     var RecentActivitiesView: some View {
         
         VStack(alignment: .leading) {
-            Text("Attività recenti")
+            Text("Recent Activities")
                 .font(.title2)
                 .fontWeight(.semibold)
                 .padding(.top, 8)

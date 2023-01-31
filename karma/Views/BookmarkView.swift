@@ -35,8 +35,10 @@ struct BookmarkView: View {
                                     } label: {
                                         CollectionView(collection: collections)
                                     }
+                                    .onTapGesture {
+                                        hideTabBar()
+                                    }
                                 }
-                                
                                 
                             }
                         }
@@ -59,6 +61,7 @@ struct BookmarkView: View {
                             Spacer()
                         }
                         .padding(.leading)
+                        .padding(.top, 3)
                         
                         ScrollView(.vertical, showsIndicators: false) {
                             ForEach(viewModel.collections) { collections in
@@ -66,6 +69,7 @@ struct BookmarkView: View {
                                     SummaryCollectionView(collection: collections)
                                 } label: {
                                     CollectionView(collection: collections)
+                                        
                                 }
                                 
                                 

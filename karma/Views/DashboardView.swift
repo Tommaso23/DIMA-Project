@@ -12,11 +12,10 @@ struct DashboardView: View {
     @State var showHeaderBar = false
     let screenHeight = UIScreen.main.bounds.height
     let screenWidth = UIScreen.main.bounds.width
-    
-
+    @State private var showNewCollectionView = false
     @State private var orientation = UIDevice.current.orientation
-
-
+    
+    
     // Variables for header
     var safeArea: EdgeInsets
     var size: CGSize
@@ -26,31 +25,44 @@ struct DashboardView: View {
             NavigationStack {
                 ZStack {
                     VStack {
-                    HStack {
-                        Image("kLogo-40")
-                        Text("arma")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+                        HStack {
+                            Image("kLogo-40")
+                            Text("arma")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .offset(x: -4, y: 5)
+                            Spacer()
+                            Button {
+                                showNewCollectionView.toggle()
+                            } label: {
+                                
+                                Image(systemName: "plus.circle")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .frame(width: 35, height: 35)
+                                    .padding(.all, 10)
+                                    .fontWeight(.semibold)
+                            }
+//                            .background(Color(.black))
                             .foregroundColor(.black)
+//                            .clipShape(Circle())
                             .offset(x: -4, y: 5)
+                            .fullScreenCover(isPresented: $showNewCollectionView) {
+                                UploadCollectionView()
+                            }
+                        }
+                        .padding(.top, 6)
+                        .padding(.horizontal)
                         
-                    }
-                    .padding()
-                    
                         ScrollView(.vertical, showsIndicators: false) {
                             
                             VStack(alignment: .center) {
                                 ForEach(viewModel.collections){ collection in
                                     NavigationLink(destination: SummaryCollectionView(collection: collection)) {
                                         iPadMainCollectionView(collection: collection)
-                                            
-                                        
-                                        //.shadow(color: .black.opacity(0.2), radius: 1, x: 6, y: 6)
-                                        //.blur(radius: 8, opaque: false)
-                                        
                                         
                                     }
-                                
+                                    
                                     Divider().padding(.horizontal)
                                 }
                                 
@@ -66,57 +78,64 @@ struct DashboardView: View {
                     
                 }
             }
-            .onTapGesture {
-                hideTabBar()
-                
-            }
         } else {
             NavigationStack {
-                //            ZStack(alignment: .bottomTrailing) {
-                ZStack(alignment: .top) {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        VStack {
-                            Text("Home")
+                ZStack {
+                    VStack {
+                        HStack {
+                            Image("kLogo-29")
+                            Text("arma")
+                                .font(.title)
+                                .fontWeight(.bold)
                                 .foregroundColor(.black)
-                                .font(.system(size: UIScreen.main.bounds.width * 0.1, weight: .bold))
-                                .padding(.top, 10)
-                                .padding(.leading, -UIScreen.main.bounds.width * 0.4)
+                                .offset(x: -4, y: 5)
                             
-                            VStack(alignment: .leading) {
+                            Spacer()
+                            
+                            Button {
+                                showNewCollectionView.toggle()
+                            } label: {
+                                Image(systemName: "plus")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .frame(width: 20, height: 20)
+                                    .padding(.all, 10)
+                                    .fontWeight(.semibold)
+                                    
+                            }
+                            .background(Color(.black))
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+//                            .padding()
+                            .offset(x: -4, y: 5)
+                            .fullScreenCover(isPresented: $showNewCollectionView) {
+                                UploadCollectionView()
+                            }
+                            
+                        }
+                        .padding(.horizontal)
+                        
+                        ScrollView(.vertical, showsIndicators: false) {
                                 ForEach(viewModel.collections){ collection in
                                     NavigationLink(destination: SummaryCollectionView(collection: collection)) {
                                         MainCollectionView(collection: collection)
-                                        
-                                        //.shadow(color: .black.opacity(0.2), radius: 1, x: 6, y: 6)
-                                        //.blur(radius: 8, opaque: false)
-                                        
-                                        
                                     }
+                                    
                                     Divider().padding(.horizontal)
                                 }
-                                
                             }
-                        }
-                        .overlay(alignment: .top) {
-                            HeaderView()
-                        }
                         Spacer().frame(height: 60)
+                        }
+                        
                     }
                     .background(Color.white)
                     .refreshable {
                         viewModel.updateHome()
                     }
-                    
                 }
             }
-            .onTapGesture {
-                hideTabBar()
-                
-            }
-            
-        }
     }
-    
+
     // MARK: HeaderView
         @ViewBuilder
         func HeaderView()->some View{
@@ -152,25 +171,6 @@ struct DashboardView: View {
 
 }
 
-//
-//struct CampaignCell: View {
-//    var campaign: Collection
-//    var body: some View{
-//        HStack {
-//            VStack(alignment: .leading, spacing: UIScreen.main.bounds.height * 0.01){
-//                Text(campaign.title)
-//                    .fontWeight(.bold)
-//                    .lineLimit(1)
-//
-//                Text(campaign.caption)
-//                    .lineLimit(2)
-//
-//                Text("\(campaign.currentAmount) / \(campaign.amount)")
-//                    .fontWeight(.semibold)
-//            }
-//        }
-//    }
-//}
 
 struct ProgressBar: View {
     var progress: Float

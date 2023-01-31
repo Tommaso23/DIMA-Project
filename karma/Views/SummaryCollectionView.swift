@@ -130,8 +130,7 @@ struct SummaryCollectionView: View {
                         .padding()
                         
                         
-                        
-//                        Spacer()
+                        Spacer().frame(height: 60)
                         
                     }
                     
@@ -179,7 +178,7 @@ struct SummaryCollectionView: View {
                         Button {
                             viewModel.collection.didLike ?? false ? viewModel.removeFromFavourite() : viewModel.addToFavourite()
                         } label: {
-                            Label(viewModel.collection.didLike ?? false ? "Remove to favourites" : "Add to favourites", systemImage: viewModel.collection.didLike ?? false ? "bookmark.fill" : "bookmark")
+                            Label(viewModel.collection.didLike ?? false ? "Remove from favourites" : "Add to favourites", systemImage: viewModel.collection.didLike ?? false ? "bookmark.fill" : "bookmark")
                         }
                         
                         Button (
@@ -211,6 +210,7 @@ struct SummaryCollectionView: View {
                 }
                 
             }
+            
         }
         .navigationBarBackButtonHidden(true)
         .foregroundColor(.black)

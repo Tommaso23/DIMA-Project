@@ -35,7 +35,7 @@ struct MainView: View {
                         let size = $0.size
                         DashboardView(viewModel: DashboardViewModel(), safeArea: safeArea, size: size)
                             .ignoresSafeArea(.container, edges: .top)
-                            .setTabBarBackground(color: .black)
+                            .setTabBarBackground(color: .white)
                             .tag(Tab.home)
                         
                     }
@@ -65,21 +65,21 @@ struct MainView: View {
                 showTabBar = false
             }
             
-            Button {
-                showNewCollectionView.toggle()
-            } label: {
-                Image(systemName: "plus.circle")
-                    .renderingMode(.template)
-                    .frame(width: 28, height: 28)
-                    .padding()
-            }
-            .background(Color(.systemBlue))
-            .foregroundColor(.white)
-            .clipShape(Circle())
-            .padding()
-            .fullScreenCover(isPresented: $showNewCollectionView) {
-                UploadCollectionView()
-            }
+//            Button {
+//                showNewCollectionView.toggle()
+//            } label: {
+//                Image(systemName: "plus.circle")
+//                    .renderingMode(.template)
+//                    .frame(width: 28, height: 28)
+//                    .padding()
+//            }
+//            .background(Color(.systemBlue))
+//            .foregroundColor(.white)
+//            .clipShape(Circle())
+//            .padding()
+//            .fullScreenCover(isPresented: $showNewCollectionView) {
+//                UploadCollectionView()
+//            }
             
             
             
@@ -96,11 +96,11 @@ struct MainView: View {
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 24, height: 24)
-                    .foregroundColor(currentTab == tab ? .white : .gray.opacity(0.5))
+                    .foregroundColor(currentTab == tab ? .black : .white)
                     .background(content : {
                         if(currentTab == tab){
                             Circle()
-                                .fill(.black)
+                                .fill(.white)
                                 .scaleEffect(2.5)
                             //.shadow(color: .black.opacity(0.3), radius: 8, x: 5, y: 10)
                                 .matchedGeometryEffect(id: "TAB", in: animation)
@@ -120,8 +120,8 @@ struct MainView: View {
         .background{
             // Custom corner
             CustomCorner(corners: [.topLeft, .topRight], radius: 25)
-                .fill(Color(.white))
-                .border(Color(.systemGray5))
+                .fill(.black)
+//                .border(Color(.systemGray5))
                 .ignoresSafeArea()
         }
         
