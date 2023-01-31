@@ -21,6 +21,7 @@ struct ProfileView: View {
     @State private var showNewCollectionView = false
     @State private var showEditPage = false
     
+    
     init(user: User) {
         self.viewModel = ProfileViewModel(user: user)
         viewModel.fetchUserCollections()
@@ -42,91 +43,105 @@ struct ProfileView: View {
                                     .scaledToFill()
                                     .clipShape(Circle())
                                     .frame(width: 100, height: 100)
+                                //                                            .onReceive(self.time) { (_) in
+                                //                                                let y = g.frame(in: .global).minY
+                                //                                                if -y > (UIScreen.main.bounds.height * 0.16) - 50 {
+                                //                                                    withAnimation {
+                                //                                                        self.showHeaderBar = true
+                                //                                                    }
+                                //                                                } else {
+                                //                                                    withAnimation {
+                                //                                                        self.showHeaderBar = false
+                                //                                                    }
+                                //                                                }
+                                //                                        }
+                                
+                                Spacer()
                             }
                             
-                            Spacer()
+                            
+                            Text("\(viewModel.user.username)")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                            
                         }
+                        .padding(.bottom, 24)
                         
-                        
-                        Text("\(viewModel.user.username)")
-                            .font(.title2)
+                    }
+                    //                            .frame(height: UIScreen.main.bounds.height / 4.3)
+                    
+                    statsView
+                    
+                    Divider()
+                    
+                    CollView
+
+                    
+                    RecentActivitiesView
+                    
+                }
+            }
+            //                    .background(Color.theme.custombackg)
+            .refreshable {
+                viewModel.fetchUserCollections()
+                viewModel.fetchPayments()
+                viewModel.fetchUser()
+            }
+            .toolbar {
+                ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "chevron.backward")
                             .fontWeight(.semibold)
-                        
-                    }
-                    .padding(.bottom, 24)
-                    
+                            .foregroundColor((viewModel.user.id == authViewModel.currentUser?.id) ? .white : .black)
+                    })
                 }
                 
-                statsView
-                
-                Divider()
-                
-                CollView
-                
-                
-                RecentActivitiesView
-                
-            }
-        }
-        .refreshable {
-            viewModel.fetchUserCollections()
-            viewModel.fetchPayments()
-            viewModel.fetchUser()
-        }
-        .toolbar {
-            ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }, label: {
-                    Image(systemName: "chevron.backward")
+                ToolbarItem(placement: ToolbarItemPlacement.principal) {
+                    
+                    Text(viewModel.user.fullname)
+                        .font(.title2)
                         .fontWeight(.semibold)
-                        .foregroundColor((viewModel.user.id == authViewModel.currentUser?.id) ? .white : .black)
-                })
-            }
-            
-            ToolbarItem(placement: ToolbarItemPlacement.principal) {
-                
-                Text(viewModel.user.fullname)
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                
-            }
-            if viewModel.user.id == authViewModel.currentUser?.id {
-                ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
-                    Menu {
-                        NavigationLink {
-                            EditProfileView(user: viewModel.user)
+                    
+                }
+                if viewModel.user.id == authViewModel.currentUser?.id {
+                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
+                        Menu {
+                            NavigationLink {
+                                EditProfileView(user: viewModel.user)
+                            } label: {
+                                Label("Edit profile", systemImage: "pencil")
+                            }
+                            
+                            Button(
+                                role: .destructive,
+                                action: {
+                                    authViewModel.signOut()
+                                }, label: {
+                                    Label("Sign out", systemImage: "rectangle.portrait.and.arrow.right")
+                                }
+                            )
+                            
                         } label: {
-                            Label("Edit profile", systemImage: "pencil")
+                            Label (
+                                title: { Text("Add") },
+                                icon: { Image(systemName: "ellipsis") }
+                            )
                         }
                         
-                        Button(
-                            role: .destructive,
-                            action: {
-                                authViewModel.signOut()
-                            }, label: {
-                                Label("Sign out", systemImage: "rectangle.portrait.and.arrow.right")
-                            }
-                        )
-                        
-                    } label: {
-                        Label (
-                            title: { Text("Add") },
-                            icon: { Image(systemName: "ellipsis") }
-                        )
                     }
-                    
                 }
+                
             }
+            .navigationBarBackButtonHidden(true)
+            .foregroundColor(.black)
             
+
         }
-        .navigationBarBackButtonHidden(true)
-        .foregroundColor(.black)
         
     }
-    
 }
-
 
 
 
@@ -140,6 +155,14 @@ struct ProfileView_Previews: PreviewProvider {
             profileImageUrl: "",
             email: "tbucaioni@virgilio.it"))
         .previewDevice("iPhone 12")
+        
+        //        ProfileView(user: User(
+        //            id: NSUUID().uuidString,
+        //            username: "tombucaioni",
+        //            fullname: "Tommaso Bucaioni",
+        //            profileImageUrl: "",
+        //            email: "tbucaioni@virgilio.it"))
+        //        .previewDevice("iPad (10th generation)")
     }
 }
 
