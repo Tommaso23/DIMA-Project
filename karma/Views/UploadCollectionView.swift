@@ -21,7 +21,7 @@ struct UploadCollectionView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var viewModel = UploadCollectionViewModel()
+    @ObservedObject var viewModel = UploadCollectionViewModel(service: CollectionService(), uploader: ImageUploader())
     @EnvironmentObject var collectionVM: CollectionViewModel
     
     var body: some View {
@@ -49,6 +49,7 @@ struct UploadCollectionView: View {
                                     .font(.title2)
                                     .fontWeight(.semibold)
                                     .foregroundColor(Color(.systemGray))
+                                    .id("photo")
                             }
                             .padding(.bottom, 20)
                             
@@ -57,6 +58,7 @@ struct UploadCollectionView: View {
                     .sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
                         ImagePicker(selectedImage: $selectedImage)
                     }
+                    .accessibility(identifier: "collectionImageUpload")
                     
                 }
                 .padding(.bottom, 10)
@@ -67,6 +69,7 @@ struct UploadCollectionView: View {
                         .fontWeight(.semibold)
                     
                     TextField("give your collection a title", text: $title)
+                        .accessibility(identifier: "collectionTitleField")
                     
                     Divider()
                         .padding(.bottom)
@@ -78,6 +81,7 @@ struct UploadCollectionView: View {
                     
                     TextField("say something about this collection", text: $description, axis: .vertical)
                         .lineLimit(4, reservesSpace: true)
+                        .accessibility(identifier: "collectionDescriptionField")
                         
                     
                 }
@@ -116,6 +120,9 @@ struct UploadCollectionView: View {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
                     Button {
                         presentationMode.wrappedValue.dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+                            showTabBar()
+                        }
                     } label: {
                         Text("Cancel")
                             .foregroundColor(.black)
@@ -149,6 +156,7 @@ struct UploadCollectionView: View {
                             
                             
                         }
+                        .accessibility(identifier: "shareCollection")
                     }
                 }
             }
@@ -156,6 +164,9 @@ struct UploadCollectionView: View {
                 if success {
                     print("\(eurosSel)")
                     presentationMode.wrappedValue.dismiss()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+                        showTabBar()
+                    }
                 }
             }
         }

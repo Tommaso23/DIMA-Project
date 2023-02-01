@@ -21,10 +21,10 @@ struct SummaryCollectionView: View {
     
     @State private var showPaymentView = false
     @ObservedObject var viewModel: SummaryCollectionViewModel
-    @ObservedObject var authViewModel = AuthViewModel()
+    @ObservedObject var authViewModel = AuthViewModel(service: UserService(), uploader: ImageUploader())
     
     init(collection: Collection){
-        self.viewModel = SummaryCollectionViewModel(collection: collection)
+        self.viewModel = SummaryCollectionViewModel(collection: collection, service: CollectionService(), paymentService: PaymentService())
     }
     
     var body: some View {
@@ -46,6 +46,7 @@ struct SummaryCollectionView: View {
                                 Text(viewModel.collection.title)
                                     .font(.title2)
                                     .fontWeight(.semibold)
+                                    .id("title")
                                 
                                 
                                 Text(viewModel.collection.user?.username ?? "")
@@ -208,11 +209,13 @@ struct SummaryCollectionView: View {
                             Label("Edit collection", systemImage: "pencil")
                         }
                         
+                        
                         Button {
                             viewModel.collection.didLike ?? false ? viewModel.removeFromFavourite() : viewModel.addToFavourite()
                         } label: {
                             Label(viewModel.collection.didLike ?? false ? "Remove from favourites" : "Add to favourites", systemImage: viewModel.collection.didLike ?? false ? "bookmark.fill" : "bookmark")
                         }
+                        
                         
                         Button (
                             role: .destructive,

@@ -34,11 +34,20 @@ struct LoginView: View {
     @State private var screenWidth = UIScreen.main.bounds.width
     
     @State private var orientation = UIDevice.current.orientation
+    private var ipad : Bool
     
+    init(test : Bool){
+        if test{
+            ipad = true
+        }
+        else{
+            ipad = UIDevice.isIPad
+        }
+    }
     
     var body: some View {
         // MARK: iPad
-        if UIDevice.isIPad{
+        if ipad{
             // Login page must be shown
             Group{
                 ZStack {
@@ -72,6 +81,7 @@ struct LoginView: View {
                                 .padding(.horizontal)
                                 .padding(.top, -getHeight()*0.04)
                                 .padding(.bottom, getHeight()*0.04)
+                                .id("titlelogipad")
                         }
                         
                         
@@ -101,7 +111,7 @@ struct LoginView: View {
                             .frame(height: UIScreen.main.bounds.height * 0.02)
                         
                         NavigationLink {
-                            RegistrationView()
+                            RegistrationView(test: false)
                         } label: {
                             HStack {
                                 Text("Don't have an account ?")
@@ -154,6 +164,7 @@ struct LoginView: View {
                             .padding(.horizontal)
                             .padding(.top, -screenHeight*0.04)
                             .padding(.bottom, screenHeight*0.04)
+                            .id("titlelog")
                     }
                     
                     
@@ -198,7 +209,7 @@ struct LoginView: View {
                     
                     
                     NavigationLink {
-                        RegistrationView()
+                        RegistrationView(test: false)
                     } label: {
                         HStack {
                             Text("Don't have an account ?")
@@ -249,6 +260,7 @@ struct LoginView: View {
     }
     
     
+
 //    struct LoginView_Previews: PreviewProvider {
 //        static var previews: some View {
 //            LoginView()
@@ -265,4 +277,21 @@ struct LoginView: View {
 //                .previewDisplayName("iPad Pro 12.9 landscape")
 //        }
 //    }
+    struct LoginView_Previews: PreviewProvider {
+        static var previews: some View {
+            LoginView(test: false)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+                .previewDisplayName("iPhone 14 Pro")
+            
+            LoginView(test: false)
+                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch) (6th generation)"))
+                .previewDisplayName("iPad Pro 12.9")
+            
+            LoginView(test: false)
+                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch) (6th generation)"))
+                .previewInterfaceOrientation(.landscapeLeft)
+                .previewDisplayName("iPad Pro 12.9 landscape")
+        }
+    }
+
 }
