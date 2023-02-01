@@ -16,6 +16,9 @@ struct SummaryCollectionView: View {
     @State var showHeaderBar = false
     @State var time = Timer.publish(every: 0.1, on: .current, in: .tracking).autoconnect()
     
+    let layout = [GridItem(.adaptive(minimum: 300))]
+    
+    
     @State private var showPaymentView = false
     @ObservedObject var viewModel: SummaryCollectionViewModel
     @ObservedObject var authViewModel = AuthViewModel()
@@ -35,7 +38,7 @@ struct SummaryCollectionView: View {
                                 KFImage(URL(string: viewModel.collection.collectionImageUrl))
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 200)
+                                    .frame(width: UIDevice.isIPad ? 500 : UIScreen.main.bounds.width * 0.9, height: UIDevice.isIPad ? 400 : 200)
                                     .padding(.top, 50)
                                 
                                 
@@ -53,30 +56,53 @@ struct SummaryCollectionView: View {
                             Spacer()
                         }
                     
-                        
-                        VStack {
-                            HStack {
-                                Text("€ \(String(viewModel.collection.currentAmount.formatted(.number.precision(.fractionLength(2))))) raised of € \(String(viewModel.collection.amount.formatted(.number.precision(.fractionLength(0)))))")
+                        if UIDevice.isIPad {
+                            VStack(spacing: 20) {
+                                Text("€ \(String(viewModel.collection.currentAmount.formatted(.number.precision(.fractionLength(0))))) raised of € \(String(viewModel.collection.amount.formatted(.number.precision(.fractionLength(0)))))")
                                     .font(.subheadline)
                                     .fontWeight(.semibold)
-                                Spacer()
+
+                                
+                                
+                                
+                                
+                                ProgressView(value: viewModel.collection.currentAmount/viewModel.collection.amount)
+                                    .scaleEffect(x: 1, y: 2)
+                                    .frame(width: 500)
+                                
+                                HStack{
+                                    Image(systemName: "person.2.fill")
+                                    Text("\(viewModel.collection.participants) donations")
+                                        .fontWeight(.regular)
+                                }
+                                
                             }
                             
-                            ProgressView(value: viewModel.collection.currentAmount/viewModel.collection.amount)
-                                .scaleEffect(x: 1, y: 2)
-                            
-                            
-                            HStack{
-                                Image(systemName: "person.2.fill")
-                                Text("\(viewModel.collection.participants) donations")
-                                    .fontWeight(.regular)
-                                Spacer()
+                        } else {
+                            VStack {
+                                HStack {
+                                    Text("€ \(String(viewModel.collection.currentAmount.formatted(.number.precision(.fractionLength(0))))) raised of € \(String(viewModel.collection.amount.formatted(.number.precision(.fractionLength(0)))))")
+                                        .font(.subheadline)
+                                        .fontWeight(.semibold)
+                                    Spacer()
+                                }
+                                
+                                ProgressView(value: viewModel.collection.currentAmount/viewModel.collection.amount)
+                                    .scaleEffect(x: 1, y: 2)
+                                
+                                
+                                HStack{
+                                    Image(systemName: "person.2.fill")
+                                    Text("\(viewModel.collection.participants) donations")
+                                        .fontWeight(.regular)
+                                    Spacer()
+                                }
+                                .font(.subheadline)
+                                .padding(.top, 10)
+                                
                             }
-                            .font(.subheadline)
-                            .padding(.top, 10)
-                            
+                            .padding(.horizontal)
                         }
-                        .padding(.horizontal)
                         
                         Button() {
                             showPaymentView.toggle()
@@ -121,9 +147,16 @@ struct SummaryCollectionView: View {
                                     .fontWeight(.semibold)
                                 Spacer()
                             }
-                            
-                            ForEach(viewModel.payments) { payment in
-                                ActivityCollectionView(payment: payment)
+                            if UIDevice.isIPad {
+                                LazyVGrid(columns: layout) {
+                                    ForEach(viewModel.payments) { payment in
+                                        ActivityCollectionView(payment: payment)
+                                    }
+                                }
+                            } else {
+                                ForEach(viewModel.payments) { payment in
+                                    ActivityCollectionView(payment: payment)
+                                }
                             }
                             
                         }
