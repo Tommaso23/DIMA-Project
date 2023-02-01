@@ -24,7 +24,7 @@ struct EditProfileView: View {
     
     
     init(user: User) {
-        self.viewModel = EditProfileViewModel(user: user, service: UserService(), uploader: ImageUploader())
+        self.viewModel = EditProfileViewModel(user: user)
     }
     
     var body: some View {
@@ -58,7 +58,6 @@ struct EditProfileView: View {
                         Text("Name:")
                             .padding(.trailing)
                         TextField(viewModel.user.fullname, text: $fullname)
-                            .accessibility(identifier: "editName")
   
                     }
                     Divider()
@@ -68,7 +67,6 @@ struct EditProfileView: View {
                         Text("Username:")
                             .padding(.trailing)
                         TextField(viewModel.user.username, text: $username).textInputAutocapitalization(.never).textCase(.lowercase)
-                            .accessibility(identifier: "editUsername")
                         
                     }
                     
@@ -92,9 +90,6 @@ struct EditProfileView: View {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
                     Button {
                         presentationMode.wrappedValue.dismiss()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
-                            showTabBar()
-                        }
                     } label: {
                         Text("Cancel")
                             .foregroundColor(.black)
@@ -110,14 +105,11 @@ struct EditProfileView: View {
                             } else {
                                 viewModel.updateUserData(fullname: fullname, username: username)
                             }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
-                                showTabBar()
-                            }
+                        
                         } label: {
                             Text("Done")
                                 .bold()
                         }
-                        .accessibility(identifier: "editDone")
                     }
             
                 

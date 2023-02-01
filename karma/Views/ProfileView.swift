@@ -23,7 +23,7 @@ struct ProfileView: View {
     
     
     init(user: User) {
-        self.viewModel = ProfileViewModel(user: user, userService: UserService(), service: CollectionService(), paymentService: PaymentService())
+        self.viewModel = ProfileViewModel(user: user)
         viewModel.fetchUserCollections()
         
     }
@@ -32,7 +32,6 @@ struct ProfileView: View {
         NavigationStack {
             ZStack(alignment: .top) {
                 ScrollView(.vertical, showsIndicators: false) {
-
                     VStack {
                         //                            GeometryReader { g in
                         VStack(alignment: .center) {
@@ -55,42 +54,6 @@ struct ProfileView: View {
                                 //                                                    }
                                 //                                                }
                                 //                                        }
-
-                        VStack {
-//                            GeometryReader { g in
-                                VStack(alignment: .center) {
-                                    HStack {
-                                        Spacer()
-                                        KFImage(URL(string: viewModel.user.profileImageUrl))
-                                            .resizable()
-                                            .scaledToFill()
-                                            .clipShape(Circle())
-                                            .frame(width: 100, height: 100)
-//                                            .onReceive(self.time) { (_) in
-//                                                let y = g.frame(in: .global).minY
-//                                                if -y > (UIScreen.main.bounds.height * 0.16) - 50 {
-//                                                    withAnimation {
-//                                                        self.showHeaderBar = true
-//                                                    }
-//                                                } else {
-//                                                    withAnimation {
-//                                                        self.showHeaderBar = false
-//                                                    }
-//                                                }
-//                                        }
-                                        
-                                        Spacer()
-                                    }
-                                    
-
-                                    Text("\(viewModel.user.username)")
-                                        .font(.title2)
-                                        .fontWeight(.semibold)
-                                        .id("username")
-     
-                                }
-                                .padding(.bottom, 24)
-
                                 
                                 Spacer()
                             }
@@ -99,9 +62,8 @@ struct ProfileView: View {
                             Text("\(viewModel.user.username)")
                                 .font(.title2)
                                 .fontWeight(.semibold)
-
+                            
                         }
-
                         .padding(.bottom, 24)
                         
                     }
@@ -149,34 +111,6 @@ struct ProfileView: View {
                                 EditProfileView(user: viewModel.user)
                             } label: {
                                 Label("Edit profile", systemImage: "pencil")
-
-                        if viewModel.user.id == authViewModel.currentUser?.id {
-                            ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
-                                Menu {
-                                    NavigationLink {
-                                        EditProfileView(user: viewModel.user)
-                                    } label: {
-                                        Label("Edit profile", systemImage: "pencil")
-                                    }
-                                    
-                                    Button(
-                                        role: .destructive,
-                                        action: {
-                                            authViewModel.signOut()
-                                            hideTabBar()
-                                        }, label: {
-                                            Label("Sign out", systemImage: "rectangle.portrait.and.arrow.right")
-                                        }
-                                    )
-                                    
-                                } label: {
-                                    Label (
-                                        title: { Text("Add") },
-                                        icon: { Image(systemName: "ellipsis") }
-                                    )
-                                }
-                                
-
                             }
                             
                             Button(
@@ -198,7 +132,6 @@ struct ProfileView: View {
                     }
                 }
                 
-
             }
             .navigationBarBackButtonHidden(true)
             .foregroundColor(.black)
@@ -206,10 +139,6 @@ struct ProfileView: View {
 
         }
         
-
-        }
-        }
-
     }
 }
 
@@ -284,7 +213,6 @@ extension ProfileView {
                             .fontWeight(.semibold)
                             .foregroundColor(Color(.systemBlue))
                     }
-                    .accessibility(identifier: "addNewCollection")
                 }
                 
             }

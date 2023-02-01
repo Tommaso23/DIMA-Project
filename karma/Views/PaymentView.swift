@@ -14,11 +14,11 @@ struct PaymentView: View {
     private var euros = [Int](0..<10000)
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: CollectionViewModel
-    @ObservedObject var paymentViewModel = PaymentViewModel(service: PaymentService())
+    @ObservedObject var paymentViewModel = PaymentViewModel()
 
     
     init(collection: Collection) {
-        self.viewModel = CollectionViewModel(collection: collection, service: CollectionService())
+        self.viewModel = CollectionViewModel(collection: collection)
     }
     
     var body: some View {
@@ -27,7 +27,6 @@ struct PaymentView: View {
                 .font(.title2)
                 .fontWeight(.semibold)
                 .padding(.top, 20)
-                .id("amount")
             
             Grid(horizontalSpacing: 20, verticalSpacing: 20) {
                 GridRow {

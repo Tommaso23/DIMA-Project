@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         Group{
             if viewModel.userSession == nil {
-                LoginView(test: false)
+                LoginView()
             } else {
                 MainView()
             }
@@ -27,7 +27,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let myEnvObject = AuthViewModel(service: UserService(), uploader: ImageUploader())
+        let myEnvObject = AuthViewModel()
         ContentView().environmentObject(myEnvObject)
     }
 }

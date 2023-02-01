@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BookmarkView: View {
     
-    @ObservedObject var viewModel = BookmarkViewModel(service: CollectionService())
+    @ObservedObject var viewModel = BookmarkViewModel()
     
     let layout = [
         GridItem(.adaptive(minimum: 300))
