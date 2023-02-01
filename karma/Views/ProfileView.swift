@@ -29,7 +29,6 @@ struct ProfileView: View {
     }
     
     var body: some View {
-        
         NavigationStack {
             ZStack(alignment: .top) {
                 ScrollView(.vertical, showsIndicators: false) {

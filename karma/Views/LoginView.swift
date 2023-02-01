@@ -42,6 +42,7 @@ struct LoginView: View {
             // Login page must be shown
             Group{
                 ZStack {
+                    Color.theme.custombackg
                     VStack(alignment: .center, spacing: getHeight() * 0.05) {
                         Spacer()
                             .frame(height: getHeight() * 0.15)
@@ -76,20 +77,10 @@ struct LoginView: View {
                         
                         VStack(spacing: getHeight()*0.05){
                             iPadCustomInputField(placeholderText: "Email", text: $email)
-                                .shadow(
-                                    color: Color.gray.opacity(0.15),
-                                    radius: getHeight() * 0.02,
-                                    x: 0,
-                                    y: 0
-                                )
                                 .textCase(.lowercase)
-                            iPadCustomInputField(placeholderText: "Password", text: $password)
-                                .shadow(
-                                    color: Color.gray.opacity(0.15),
-                                    radius: getHeight() * 0.02,
-                                    x: 0,
-                                    y: 0
-                                )
+                            
+                            iPadCustomInputField(placeholderText: "Password", isSecureField: true, text: $password)
+                                
                                 .textCase(.lowercase)
                         }
                         
@@ -102,7 +93,7 @@ struct LoginView: View {
                                 .font(.headline)
                                 .frame(width: getWidth()*0.4, height: getHeight() * 0.05)
                                 .foregroundColor(.white)
-                                .background(.blue)
+                                .background(.black)
                                 .cornerRadius(getHeight()*0.02)
                         }
                         

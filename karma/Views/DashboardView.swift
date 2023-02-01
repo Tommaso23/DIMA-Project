@@ -43,15 +43,13 @@ struct DashboardView: View {
                                     .padding(.all, 10)
                                     .fontWeight(.semibold)
                             }
-//                            .background(Color(.black))
                             .foregroundColor(.black)
-//                            .clipShape(Circle())
                             .offset(x: -4, y: 5)
                             .fullScreenCover(isPresented: $showNewCollectionView) {
                                 UploadCollectionView()
                             }
                         }
-                        .padding(.top, 6)
+//                        .padding(.top, 6)
                         .padding(.horizontal)
                         
                         ScrollView(.vertical, showsIndicators: false) {
