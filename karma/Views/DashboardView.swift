@@ -26,7 +26,7 @@ struct DashboardView: View {
                 ZStack {
                     VStack {
                         HStack {
-                            Image("kLogo-40")
+                            Image("IMG_8198-40")
                             Text("arma")
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
@@ -81,7 +81,8 @@ struct DashboardView: View {
                 ZStack {
                     VStack {
                         HStack {
-                            Image("kLogo-29")
+                            Image("IMG_8198-29")
+                                .offset(y: 4)
                             Text("arma")
                                 .font(.title)
                                 .fontWeight(.bold)
