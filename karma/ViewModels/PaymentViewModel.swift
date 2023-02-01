@@ -28,8 +28,7 @@ class PaymentViewModel: ObservableObject {
             self.service.makePayment(destinationId: destination, collection: collection, total: euros) {
                 success in
                 if success {
-                    self.didMakePayment = true
-                    
+                    self.didMakePayment = true 
                 } else {
                     
                 }

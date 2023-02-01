@@ -51,6 +51,7 @@ struct LoginView: View {
             // Login page must be shown
             Group{
                 ZStack {
+                    Color.theme.custombackg
                     VStack(alignment: .center, spacing: getHeight() * 0.05) {
                         Spacer()
                             .frame(height: getHeight() * 0.15)
@@ -86,20 +87,10 @@ struct LoginView: View {
                         
                         VStack(spacing: getHeight()*0.05){
                             iPadCustomInputField(placeholderText: "Email", text: $email)
-                                .shadow(
-                                    color: Color.gray.opacity(0.15),
-                                    radius: getHeight() * 0.02,
-                                    x: 0,
-                                    y: 0
-                                )
                                 .textCase(.lowercase)
-                            iPadCustomInputField(placeholderText: "Password", text: $password)
-                                .shadow(
-                                    color: Color.gray.opacity(0.15),
-                                    radius: getHeight() * 0.02,
-                                    x: 0,
-                                    y: 0
-                                )
+                            
+                            iPadCustomInputField(placeholderText: "Password", isSecureField: true, text: $password)
+                                
                                 .textCase(.lowercase)
                         }
                         
@@ -112,7 +103,7 @@ struct LoginView: View {
                                 .font(.headline)
                                 .frame(width: getWidth()*0.4, height: getHeight() * 0.05)
                                 .foregroundColor(.white)
-                                .background(.blue)
+                                .background(.black)
                                 .cornerRadius(getHeight()*0.02)
                         }
                         
@@ -145,6 +136,7 @@ struct LoginView: View {
         // MARK: iPhone
         else {
             ZStack {
+                Color.theme.custombackg
                 VStack(alignment: .center, spacing: screenHeight * 0.05) {
                     Spacer()
                         .frame(height: screenHeight * 0.15)
@@ -158,7 +150,7 @@ struct LoginView: View {
                         Text("arma")
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                            .foregroundColor(Color.theme.dark)
+                            .foregroundColor(.black)
                     }
                     .offset(x: -screenHeight * 0.008)
                     
@@ -168,7 +160,7 @@ struct LoginView: View {
                         Text("Login")
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                            .foregroundColor(Color.theme.dark)
+                            .foregroundColor(.black)
                             .padding(.horizontal)
                             .padding(.top, -screenHeight*0.04)
                             .padding(.bottom, screenHeight*0.04)
@@ -178,12 +170,13 @@ struct LoginView: View {
                     
                     VStack(spacing: screenHeight*0.05){
                         CustomInputField(placeholderText: "Email", text: $email)
-                            .shadow(
-                                color: Color.gray.opacity(0.15),
-                                radius: screenHeight * 0.02,
-                                x: 0,
-                                y: 0
-                            )
+                            
+//                            .shadow(
+//                                color: Color.black,
+//                                radius: screenHeight * 0.02,
+//                                x: 0,
+//                                y: 0
+//                            )
                             .textCase(.lowercase)
                         
                         CustomInputField(placeholderText: "Password", isSecureField: true, text: $password)
@@ -207,7 +200,7 @@ struct LoginView: View {
                             .font(.headline)
                             .frame(width: screenWidth*0.8, height: screenHeight * 0.06)
                             .foregroundColor(.white)
-                            .background(.blue)
+                            .background(.black)
                             .cornerRadius(screenHeight*0.02)
                     }
                     
@@ -267,6 +260,23 @@ struct LoginView: View {
     }
     
     
+
+//    struct LoginView_Previews: PreviewProvider {
+//        static var previews: some View {
+//            LoginView()
+//                .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+//                .previewDisplayName("iPhone 14 Pro")
+//
+//            LoginView()
+//                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch) (6th generation)"))
+//                .previewDisplayName("iPad Pro 12.9")
+//
+//            LoginView()
+//                .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch) (6th generation)"))
+//                .previewInterfaceOrientation(.landscapeLeft)
+//                .previewDisplayName("iPad Pro 12.9 landscape")
+//        }
+//    }
     struct LoginView_Previews: PreviewProvider {
         static var previews: some View {
             LoginView(test: false)
@@ -283,4 +293,5 @@ struct LoginView: View {
                 .previewDisplayName("iPad Pro 12.9 landscape")
         }
     }
+
 }

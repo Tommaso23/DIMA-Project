@@ -52,7 +52,8 @@ struct ImageUploaderView: View {
                     Text("Continue")
                         .font(.headline)
                         .foregroundColor(.white)
-                        .frame(width: UIScreen.main.bounds.size.width*0.8, height: 50)
+                        .frame(width:
+                                UIDevice.isIPad ? 400 : UIScreen.main.bounds.size.width*0.8, height: 50)
                         .background(Color.theme.dark)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                 }
