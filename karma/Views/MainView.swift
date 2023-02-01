@@ -35,21 +35,27 @@ struct MainView: View {
                         let size = $0.size
                         DashboardView(viewModel: DashboardViewModel(userService: UserService(), service: CollectionService()), safeArea: safeArea, size: size)
                             .ignoresSafeArea(.container, edges: .top)
-                            .setTabBarBackground(color: .white)
+                            .setTabBarBackground(color: Color("BG"))
                             .tag(Tab.home)
                         
                     }
                     
                     SearchView()
-                        .setTabBarBackground(color: .black)
+                        .setTabBarBackground(color: Color("BG"))
                         .tag(Tab.search)
                     
+                    //                    UploadCollectionView()
+                    //                        .setTabBarBackground(color: Color("BG"))
+                    //                        .tag(Tab.post)
+                    
+
+                    
                     BookmarkView()
-                        .setTabBarBackground(color: .black)
+                        .setTabBarBackground(color: Color("BG"))
                         .tag(Tab.bookmarks)
                     
                     ProfileView(user: user)
-                        .setTabBarBackground(color: .black)
+                        .setTabBarBackground(color: Color("BG"))
                         .tag(Tab.profile)
                 }
                 TabBar()
@@ -66,21 +72,21 @@ struct MainView: View {
                 showTabBar = false
             }
             
-//            Button {
-//                showNewCollectionView.toggle()
-//            } label: {
-//                Image(systemName: "plus.circle")
-//                    .renderingMode(.template)
-//                    .frame(width: 28, height: 28)
-//                    .padding()
-//            }
-//            .background(Color(.systemBlue))
-//            .foregroundColor(.white)
-//            .clipShape(Circle())
-//            .padding()
-//            .fullScreenCover(isPresented: $showNewCollectionView) {
-//                UploadCollectionView()
-//            }
+            Button {
+                showNewCollectionView.toggle()
+            } label: {
+                Image(systemName: "plus.circle")
+                    .renderingMode(.template)
+                    .frame(width: 28, height: 28)
+                    .padding()
+            }
+            .background(Color(.systemBlue))
+            .foregroundColor(.white)
+            .clipShape(Circle())
+            .padding()
+            .fullScreenCover(isPresented: $showNewCollectionView) {
+                UploadCollectionView()
+            }
             
             
             
@@ -97,11 +103,11 @@ struct MainView: View {
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 24, height: 24)
-                    .foregroundColor(currentTab == tab ? .black : .white)
+                    .foregroundColor(currentTab == tab ? .white : .gray.opacity(0.5))
                     .background(content : {
                         if(currentTab == tab){
                             Circle()
-                                .fill(.white)
+                                .fill(.black)
                                 .scaleEffect(2.5)
                             //.shadow(color: .black.opacity(0.3), radius: 8, x: 5, y: 10)
                                 .matchedGeometryEffect(id: "TAB", in: animation)
@@ -121,11 +127,9 @@ struct MainView: View {
         .background{
             // Custom corner
             CustomCorner(corners: [.topLeft, .topRight], radius: 25)
-                .fill(.black)
-//                .border(Color(.systemGray5))
+                .fill(Color(.white))
                 .ignoresSafeArea()
         }
-        
     }
     
 }

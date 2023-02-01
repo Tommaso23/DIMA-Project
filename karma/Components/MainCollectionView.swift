@@ -20,7 +20,7 @@ struct MainCollectionView: View {
     var body: some View {
         
         HStack(spacing: 2){
-
+//                        RoundedRectangle(cornerRadius: 10)
             KFImage(URL(string: collection.collectionImageUrl))
                 .resizable()
                 .scaledToFit()

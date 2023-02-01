@@ -14,48 +14,24 @@ struct ProfileView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var authViewModel: AuthViewModel
-    @ObservedObject var viewModel: ProfileViewModel
-    let layout = [GridItem(.adaptive(minimum: 300))]
     
+    @ObservedObject var viewModel: ProfileViewModel
+//    @State var showHeaderBar = false
     @State var time = Timer.publish(every: 0.1, on: .current, in: .tracking).autoconnect()
     @State private var showNewCollectionView = false
     @State private var showEditPage = false
     
-    
     init(user: User) {
         self.viewModel = ProfileViewModel(user: user, userService: UserService(), service: CollectionService(), paymentService: PaymentService())
         viewModel.fetchUserCollections()
-        
+    
     }
     
     var body: some View {
+        
         NavigationStack {
             ZStack(alignment: .top) {
                 ScrollView(.vertical, showsIndicators: false) {
-
-                    VStack {
-                        //                            GeometryReader { g in
-                        VStack(alignment: .center) {
-                            HStack {
-                                Spacer()
-                                KFImage(URL(string: viewModel.user.profileImageUrl))
-                                    .resizable()
-                                    .scaledToFill()
-                                    .clipShape(Circle())
-                                    .frame(width: 100, height: 100)
-                                //                                            .onReceive(self.time) { (_) in
-                                //                                                let y = g.frame(in: .global).minY
-                                //                                                if -y > (UIScreen.main.bounds.height * 0.16) - 50 {
-                                //                                                    withAnimation {
-                                //                                                        self.showHeaderBar = true
-                                //                                                    }
-                                //                                                } else {
-                                //                                                    withAnimation {
-                                //                                                        self.showHeaderBar = false
-                                //                                                    }
-                                //                                                }
-                                //                                        }
-
                         VStack {
 //                            GeometryReader { g in
                                 VStack(alignment: .center) {
@@ -90,66 +66,46 @@ struct ProfileView: View {
      
                                 }
                                 .padding(.bottom, 24)
-
                                 
-                                Spacer()
                             }
+//                            .frame(height: UIScreen.main.bounds.height / 4.3)
                             
+                            statsView
                             
-                            Text("\(viewModel.user.username)")
+                            Divider()
+                            
+                            CollView
+                            
+                            if widthSizeClass == .compact{
+                                RecentActivitiesView
+                            } else {
+                                Text("modalità Ipad")
+                            }
+                        }
+                    }
+                    .background(Color.theme.custombackg)
+                    .refreshable {
+                        viewModel.fetchUserCollections()
+                       viewModel.fetchPayments()
+                        viewModel.fetchUser()
+                    }
+                    .toolbar {
+                        ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
+                            Button(action: {
+                                presentationMode.wrappedValue.dismiss()
+                            }, label: {
+                                Image(systemName: "chevron.backward")
+                                    .fontWeight(.semibold)
+                            })
+                        }
+                        
+                        ToolbarItem(placement: ToolbarItemPlacement.principal) {
+        
+                            Text(viewModel.user.fullname)
                                 .font(.title2)
                                 .fontWeight(.semibold)
 
                         }
-
-                        .padding(.bottom, 24)
-                        
-                    }
-                    //                            .frame(height: UIScreen.main.bounds.height / 4.3)
-                    
-                    statsView
-                    
-                    Divider()
-                    
-                    CollView
-
-                    
-                    RecentActivitiesView
-                    
-                }
-            }
-            //                    .background(Color.theme.custombackg)
-            .refreshable {
-                viewModel.fetchUserCollections()
-                viewModel.fetchPayments()
-                viewModel.fetchUser()
-            }
-            .toolbar {
-                ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image(systemName: "chevron.backward")
-                            .fontWeight(.semibold)
-                            .foregroundColor((viewModel.user.id == authViewModel.currentUser?.id) ? .white : .black)
-                    })
-                }
-                
-                ToolbarItem(placement: ToolbarItemPlacement.principal) {
-                    
-                    Text(viewModel.user.fullname)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    
-                }
-                if viewModel.user.id == authViewModel.currentUser?.id {
-                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
-                        Menu {
-                            NavigationLink {
-                                EditProfileView(user: viewModel.user)
-                            } label: {
-                                Label("Edit profile", systemImage: "pencil")
-
                         if viewModel.user.id == authViewModel.currentUser?.id {
                             ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
                                 Menu {
@@ -176,43 +132,30 @@ struct ProfileView: View {
                                     )
                                 }
                                 
-
                             }
-                            
-                            Button(
-                                role: .destructive,
-                                action: {
-                                    authViewModel.signOut()
-                                }, label: {
-                                    Label("Sign out", systemImage: "rectangle.portrait.and.arrow.right")
-                                }
-                            )
-                            
-                        } label: {
-                            Label (
-                                title: { Text("Add") },
-                                icon: { Image(systemName: "ellipsis") }
-                            )
                         }
                         
                     }
-                }
+                    .navigationBarBackButtonHidden(true)
+                    .foregroundColor(.black)
                 
-
-            }
-            .navigationBarBackButtonHidden(true)
-            .foregroundColor(.black)
-            
-
+//                if self.showHeaderBar {
+//                    HStack {
+//                        Spacer()
+//                        Text(viewModel.user.username)
+//                            .font(.title3)
+//                            .fontWeight(.bold)
+//                        Spacer()
+//                    }
+//                    .padding(.bottom)
+//                    .background(Color.theme.custombackg)
+//                }
+                
+                
         }
-        
-
         }
-        }
-
     }
-}
-
+//}
 
 
 
@@ -226,13 +169,13 @@ struct ProfileView_Previews: PreviewProvider {
             email: "tbucaioni@virgilio.it"))
         .previewDevice("iPhone 12")
         
-        //        ProfileView(user: User(
-        //            id: NSUUID().uuidString,
-        //            username: "tombucaioni",
-        //            fullname: "Tommaso Bucaioni",
-        //            profileImageUrl: "",
-        //            email: "tbucaioni@virgilio.it"))
-        //        .previewDevice("iPad (10th generation)")
+//        ProfileView(user: User(
+//            id: NSUUID().uuidString,
+//            username: "tombucaioni",
+//            fullname: "Tommaso Bucaioni",
+//            profileImageUrl: "",
+//            email: "tbucaioni@virgilio.it"))
+//        .previewDevice("iPad (10th generation)")
     }
 }
 
@@ -244,20 +187,20 @@ extension ProfileView {
             
             VStack {
                 Text("\(viewModel.sentPayments.count)")
-                Text("Donations")
+                Text("Donazioni")
                     .fontWeight(.regular)
             }
             .frame(width: UIScreen.main.bounds.width * 0.33)
-            
+
             VStack {
                 Text("\(viewModel.collections.count)")
-                Text("Collections")
+                Text("Raccolte")
                     .fontWeight(.regular)
             }
             .frame(width: UIScreen.main.bounds.width * 0.33)
             VStack {
-                Text("\(String(viewModel.balance.formatted(.number.precision(.fractionLength(0)))))")
-                Text("Points")
+                Text("\(String(viewModel.balance.formatted(.number.precision(.fractionLength(0))))) €")
+                Text("Bilancio")
                     .fontWeight(.regular)
             }
             .frame(width: UIScreen.main.bounds.width * 0.33)
@@ -271,7 +214,7 @@ extension ProfileView {
     var CollView: some View {
         VStack(alignment: .center) {
             HStack {
-                Text("Collections")
+                Text("Raccolte")
                     .font(.title2)
                     .fontWeight(.semibold)
                 
@@ -299,20 +242,16 @@ extension ProfileView {
                         NavigationLink {
                             SummaryCollectionView(collection: collection)
                         } label: {
-                            CollectionView(collection: collection)
-                                .padding(.horizontal, UIDevice.isIPad ? 6 : 10)
+                            CollectionView(collection: collection).padding(.horizontal, 18)
                                 
                         }
                         
-//                        .padding(.trailing, 10 )
-                        
                         
                     }
-                    .padding(.horizontal, 15)
                     
                 }
             }
-            
+        
         }
         .padding(.horizontal)
     }
@@ -320,34 +259,24 @@ extension ProfileView {
     var RecentActivitiesView: some View {
         
         VStack(alignment: .leading) {
+            Text("Attività recenti")
+                .font(.title2)
+                .fontWeight(.semibold)
+                .padding(.top, 8)
             
-            
-            if UIDevice.isIPad {
-                Text("Recent Activities")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .padding(.top, 8)
-                    .offset(x: 30)
-                LazyVGrid(columns: layout) {
-                    ForEach(viewModel.totalPayments) { payment in
-                        RecentUserActivityView(payment: payment, isPositive: payment.isPositive ?? false)
-                            .padding(.vertical, 4)
-                    }
+            VStack {
+                ForEach(viewModel.totalPayments) { payment in
+                    RecentUserActivityView(payment: payment, isPositive: payment.isPositive ?? false)
+                        .padding(.bottom, 4)
                 }
-                .padding(.horizontal, 20)
-            } else {
-                Text("Recent Activities")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .padding(.top, 8)
-                VStack {
-                    ForEach(viewModel.totalPayments) { payment in
-                        RecentUserActivityView(payment: payment, isPositive: payment.isPositive ?? false)
-                            .padding(.bottom, 4)
-                    }
-                    
-                  
-                }
+
+//                ForEach(viewModel.sentPayments) { payment in
+//                    RecentUserActivityView(payment: payment, isPositive: payment.isPositive ?? false)
+//                }
+//
+//                ForEach(viewModel.receivedPayments) { payment in
+//                    RecentUserActivityView(payment: payment, isPositive: payment.isPositive ?? false)
+//                }
             }
             Spacer().frame(height: 60)
         }
