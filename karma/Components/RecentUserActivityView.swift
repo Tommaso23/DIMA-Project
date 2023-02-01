@@ -54,12 +54,12 @@ struct RecentUserActivityView: View {
             Text((isPositive ? "+ \(String(viewModel.payment.total.formatted(.number.precision(.fractionLength(0))))) €" : "- \(String(viewModel.payment.total.formatted(.number.precision(.fractionLength(0))))) €"))
                 .font(.title2)
                 .fontWeight(.semibold)
-                .foregroundColor(isPositive ? Color.green : Color.red)
+                .foregroundColor(.black)
                 .padding(.trailing)
                 .id("amount")
         }
-        .frame(width: UIScreen.main.bounds.size.width*0.9, height: 100)
-        .background(.white)
+        .frame(width: UIDevice.isIPad ? 300 : 320, height: 100)
+        .background(Color.theme.custombackg)
         .containerShape(RoundedRectangle(cornerRadius: 15))
     }
 }

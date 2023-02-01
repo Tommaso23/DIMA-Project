@@ -24,6 +24,7 @@ struct CustomInputField: View {
                 } else {
                     TextField(placeholderText, text: $text)
                         .padding()
+                        
                 }
             }
             .frame(width: screenWidth*0.8, height: screenHeight * 0.06)

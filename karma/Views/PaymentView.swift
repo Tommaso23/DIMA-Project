@@ -37,11 +37,13 @@ struct PaymentView: View {
                         Text("2 €")
                             .font(.title2)
                             .fontWeight(.semibold)
-                            .padding(.horizontal, 30)
-                            .padding(.vertical, 22)
-                            .border(Color(.systemBlue), width: 2)
+                            .padding()
+                            .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.black, lineWidth: 1)
+                            )
+                            
                     }
-                    
                     
                     Button {
                         self.eurosSel = 5
@@ -49,9 +51,11 @@ struct PaymentView: View {
                         Text("5 €")
                             .font(.title2)
                             .fontWeight(.semibold)
-                            .padding(.horizontal, 30)
-                            .padding(.vertical, 22)
-                            .border(Color(.systemBlue), width: 2)
+                            .padding()
+                            .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.black, lineWidth: 1)
+                            )
                     }
                 }
                 
@@ -62,9 +66,11 @@ struct PaymentView: View {
                         Text("10 €")
                             .font(.title2)
                             .fontWeight(.semibold)
-                            .padding(.horizontal, 24)
-                            .padding(.vertical, 22)
-                            .border(Color(.systemBlue), width: 2)
+                            .padding()
+                            .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.black, lineWidth: 1)
+                            )
                     }
                     
                     Button {
@@ -73,9 +79,11 @@ struct PaymentView: View {
                         Text("20 €")
                             .font(.title2)
                             .fontWeight(.semibold)
-                            .padding(.horizontal, 24)
-                            .padding(.vertical, 22)
-                            .border(Color(.systemBlue), width: 2)
+                            .padding()
+                            .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(.black, lineWidth: 1)
+                            )
                     }
                 }
                 
@@ -93,11 +101,6 @@ struct PaymentView: View {
                 paymentViewModel.makePayment(forCollection: viewModel.collection, ofAmount: Float(eurosSel))
             }
             .padding()
-//            Button {
-//                paymentViewModel.makePayment(forCollection: viewModel.collection, ofAmount: Float(eurosSel))
-//            } label: {
-//                Text("PAY")
-//            }
         }
         .onReceive(paymentViewModel.$didMakePayment) { success in
             if success {

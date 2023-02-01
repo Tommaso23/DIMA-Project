@@ -13,7 +13,6 @@ import FirebaseFirestore
 struct CollectionView: View {
     @ObservedObject var viewModel: CollectionViewModel
     
-    @State private var showSummaryCollection = false
     
     //    private var percentage: Float = 0.0
 //    private let numberFormatter: NumberFormatter
@@ -49,7 +48,7 @@ struct CollectionView: View {
             Text(viewModel.collection.caption)
                 .font(.headline)
                 .fontWeight(.semibold)
-                .foregroundColor(Color(.systemGray2))
+                .foregroundColor(Color(.systemGray))
                 .frame(maxHeight: 80)
             
             HStack {
@@ -75,18 +74,18 @@ struct CollectionView: View {
             
             HStack {
                 Button(action: {
-//                    Text((isPositive ? viewModel.payment.sender?.username : viewModel.payment.receiver?.username) ?? "")
                     viewModel.collection.didLike ?? false ? viewModel.removeFromFavourite() : viewModel.addToFavourite()
                 }, label: {
                     Image(systemName: viewModel.collection.didLike ?? false ? "bookmark.fill" : "bookmark")
                         
+                        
                 })
                 .padding(.trailing, 6)
                 
-                Image(systemName: "square.and.arrow.up")
-                    .padding(.trailing, 6)
-                Image(systemName: "ellipsis")
-                    .padding(.trailing, 6)
+//                Image(systemName: "square.and.arrow.up")
+//                    .padding(.trailing, 6)
+//                Image(systemName: "ellipsis")
+//                    .padding(.trailing, 6)
                 Spacer()
                 Button {
                     showPaymentView.toggle()
@@ -95,8 +94,8 @@ struct CollectionView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .frame(width: 90, height: 30)
-                        .background(Color(.systemBlue))
-                        .clipShape(Capsule())
+                        .background(Color(.black))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                     
                 }
                 .sheet(isPresented: $showPaymentView) { PaymentView(collection: viewModel.collection).presentationDetents([.medium])
@@ -109,8 +108,8 @@ struct CollectionView: View {
             
         }
         .padding()
-        .frame(width: UIScreen.main.bounds.size.width*0.9, height: 230)
-        .background(Color(.white))
+        .frame(width: UIDevice.isIPad ? 310 : 350, height: 230)
+        .background(Color.theme.custombackg)
         .clipShape(RoundedRectangle(cornerRadius: 15))
     }
 }
