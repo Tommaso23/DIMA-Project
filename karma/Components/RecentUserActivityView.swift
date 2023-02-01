@@ -57,7 +57,7 @@ struct RecentUserActivityView: View {
                 .foregroundColor(.black)
                 .padding(.trailing)
         }
-        .frame(width: 320, height: 100)
+        .frame(width: UIDevice.isIPad ? 300 : 320, height: 100)
         .background(Color.theme.custombackg)
         .containerShape(RoundedRectangle(cornerRadius: 15))
     }

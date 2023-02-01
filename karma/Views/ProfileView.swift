@@ -14,9 +14,9 @@ struct ProfileView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var authViewModel: AuthViewModel
-    
     @ObservedObject var viewModel: ProfileViewModel
-    //    @State var showHeaderBar = false
+    let layout = [GridItem(.adaptive(minimum: 300))]
+    
     @State var time = Timer.publish(every: 0.1, on: .current, in: .tracking).autoconnect()
     @State private var showNewCollectionView = false
     @State private var showEditPage = false
@@ -229,7 +229,7 @@ extension ProfileView {
                             SummaryCollectionView(collection: collection)
                         } label: {
                             CollectionView(collection: collection)
-                                .padding(.horizontal, 10)
+                                .padding(.horizontal, UIDevice.isIPad ? 6 : 10)
                                 
                         }
                         
@@ -249,24 +249,34 @@ extension ProfileView {
     var RecentActivitiesView: some View {
         
         VStack(alignment: .leading) {
-            Text("Recent Activities")
-                .font(.title2)
-                .fontWeight(.semibold)
-                .padding(.top, 8)
             
-            VStack {
-                ForEach(viewModel.totalPayments) { payment in
-                    RecentUserActivityView(payment: payment, isPositive: payment.isPositive ?? false)
-                        .padding(.bottom, 4)
+            
+            if UIDevice.isIPad {
+                Text("Recent Activities")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .padding(.top, 8)
+                    .offset(x: 30)
+                LazyVGrid(columns: layout) {
+                    ForEach(viewModel.totalPayments) { payment in
+                        RecentUserActivityView(payment: payment, isPositive: payment.isPositive ?? false)
+                            .padding(.vertical, 4)
+                    }
                 }
-                
-                //                ForEach(viewModel.sentPayments) { payment in
-                //                    RecentUserActivityView(payment: payment, isPositive: payment.isPositive ?? false)
-                //                }
-                //
-                //                ForEach(viewModel.receivedPayments) { payment in
-                //                    RecentUserActivityView(payment: payment, isPositive: payment.isPositive ?? false)
-                //                }
+                .padding(.horizontal, 20)
+            } else {
+                Text("Recent Activities")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .padding(.top, 8)
+                VStack {
+                    ForEach(viewModel.totalPayments) { payment in
+                        RecentUserActivityView(payment: payment, isPositive: payment.isPositive ?? false)
+                            .padding(.bottom, 4)
+                    }
+                    
+                  
+                }
             }
             Spacer().frame(height: 60)
         }
