@@ -24,9 +24,9 @@ struct iPadMainCollectionView: View {
 //                RoundedRectangle(cornerRadius: 10)
             KFImage(URL(string: collection.collectionImageUrl))
                 .resizable()
-                .scaledToFit()
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .scaledToFill()
                 .frame(width: 500, height: 400)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
                 .padding(.horizontal)
             
             Text(collection.title)
