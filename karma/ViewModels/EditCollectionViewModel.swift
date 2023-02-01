@@ -12,14 +12,11 @@ import FirebaseFirestore
 
 class EditCollectionViewModel: ObservableObject {
     
-    private let service : CollectionServiceProtocol
+    private let service = CollectionService()
     @Published var didEditCollection = false
     let collection: Collection
-    let uploader : ImageUploaderProtocol
     
-    init(collection: Collection, service: CollectionServiceProtocol, uploader : ImageUploaderProtocol) {
-        self.uploader = uploader
-        self.service = service
+    init(collection: Collection) {
         self.collection = collection
     }
     
@@ -35,7 +32,7 @@ class EditCollectionViewModel: ObservableObject {
     
     func editImage(_ image: UIImage) {
         guard let cid = collection.id else { return }
-        uploader.uploadImage(image: image) { collectionImageUrl in
+        ImageUploader.uploadImage(image: image) { collectionImageUrl in
             Firestore.firestore().collection("collections").document(cid).updateData(["collectionImageUrl": collectionImageUrl]) { _ in
                 print(collectionImageUrl)
             }

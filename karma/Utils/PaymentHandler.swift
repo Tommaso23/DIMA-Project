@@ -17,12 +17,12 @@ class PaymentHandler: NSObject {
     var completionHandler: PaymentCompletionHandler?
 
     static let supportedNetworks: [PKPaymentNetwork] = [.visa, .masterCard]
-    
+
     func startPayment(total: Float, completion: @escaping PaymentCompletionHandler) {
         completionHandler = completion
         let total = PKPaymentSummaryItem(label: "Total", amount: NSDecimalNumber(string: "\(total).00"), type: .final)
         paymentSummaryItems.append(total)
-        
+
         let paymentRequest = PKPaymentRequest()
         paymentRequest.paymentSummaryItems = paymentSummaryItems
         paymentRequest.merchantIdentifier = "merchant.dima.karma"
@@ -33,7 +33,7 @@ class PaymentHandler: NSObject {
 //        paymentRequest.shippingType = .delivery
 //        paymentRequest.shippingMethods = .none
 //        paymentRequest.requiredShippingContactFields = [.name, .postalAddress]
-        
+
         paymentController = PKPaymentAuthorizationController(paymentRequest: paymentRequest)
         paymentController?.delegate = self
         paymentController?.present(completion: { (presented: Bool) in
@@ -42,7 +42,6 @@ class PaymentHandler: NSObject {
                 completion(true)
             } else {
                 debugPrint("Failed to present payment controller")
-                completion(false)
             }
         })
     }
@@ -52,11 +51,11 @@ extension PaymentHandler: PKPaymentAuthorizationControllerDelegate {
     func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
         let errors = [Error]()
         let status = PKPaymentAuthorizationStatus.success
-        
+
         self.paymentStatus = status
         completion(PKPaymentAuthorizationResult(status: status, errors: errors))
     }
-    
+
     func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
         controller.dismiss {
             DispatchQueue.main.async {

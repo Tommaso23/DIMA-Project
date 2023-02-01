@@ -9,10 +9,10 @@ import SwiftUI
 import Firebase
 
 struct SearchView: View {
-    @State var selectedFilter: FilterSearchViewModel = .users
+    @State private var selectedFilter: FilterSearchViewModel = .users
     @Namespace var animation
     
-    @ObservedObject var viewModel = SearchViewModel(userService: UserService(), collectionService: CollectionService())
+    @ObservedObject var viewModel = SearchViewModel()
     
     var body: some View {
         NavigationStack {

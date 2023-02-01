@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BookmarkView: View {
     
-    @ObservedObject var viewModel = BookmarkViewModel(service: CollectionService())
+    @ObservedObject var viewModel = BookmarkViewModel()
     
     var body: some View {
         NavigationStack {

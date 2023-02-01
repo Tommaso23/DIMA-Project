@@ -12,11 +12,7 @@ import Firebase
 class PaymentViewModel: ObservableObject {
     
     @Published var didMakePayment = false
-    let service : PaymentServiceProtocol
-    
-    init(service: PaymentServiceProtocol){
-        self.service = service
-    }
+    let service = PaymentService()
     
     let paymentHandler = PaymentHandler()
     @Published private(set) var paymentSuccess = false

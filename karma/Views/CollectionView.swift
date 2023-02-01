@@ -21,7 +21,7 @@ struct CollectionView: View {
     @State private var showPaymentView = false
     //
     init(collection: Collection) {
-        self.viewModel = CollectionViewModel(collection: collection, service: CollectionService())
+        self.viewModel = CollectionViewModel(collection: collection)
 //        numberFormatter = NumberFormatter()
 //        numberFormatter.numberStyle = .decimal
 //        numberFormatter.maximumFractionDigits = 2

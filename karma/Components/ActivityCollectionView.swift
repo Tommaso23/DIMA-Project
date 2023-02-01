@@ -13,7 +13,7 @@ struct ActivityCollectionView: View {
     @ObservedObject var viewModel: ActivityCollectionViewModel
     
     init(payment: Payment) {
-        self.viewModel = ActivityCollectionViewModel(payment: payment, service: PaymentService(), userService: UserService())
+        self.viewModel = ActivityCollectionViewModel(payment: payment)
     }
     
     var body: some View {
@@ -46,7 +46,6 @@ struct ActivityCollectionView: View {
                 .font(.title2)
                 .fontWeight(.semibold)
                 .padding(.trailing)
-                .id("money")
                 
         }
         .frame(width: UIScreen.main.bounds.size.width*0.9, height: 100)

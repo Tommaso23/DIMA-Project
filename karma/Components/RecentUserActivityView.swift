@@ -15,7 +15,7 @@ struct RecentUserActivityView: View {
 
     
     init(payment: Payment, isPositive: Bool) {
-        self.viewModel = RecentUserActivityViewModel(payment: payment, userService: UserService(), service: PaymentService(), collectionService: CollectionService())
+        self.viewModel = RecentUserActivityViewModel(payment: payment)
         self.isPositive = isPositive
     }
     
@@ -56,7 +56,6 @@ struct RecentUserActivityView: View {
                 .fontWeight(.semibold)
                 .foregroundColor(isPositive ? Color.green : Color.red)
                 .padding(.trailing)
-                .id("amount")
         }
         .frame(width: UIScreen.main.bounds.size.width*0.9, height: 100)
         .background(.white)

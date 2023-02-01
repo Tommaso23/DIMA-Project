@@ -42,7 +42,6 @@ struct MainCollectionView: View {
                 //                        .padding(.bottom, 2)
                     .lineLimit(1)
                     .foregroundColor(.black)
-                    .id("CollTitle")
                 
                 
                 
