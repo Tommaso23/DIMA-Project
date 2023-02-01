@@ -16,9 +16,6 @@ struct SummaryCollectionView: View {
     @State var showHeaderBar = false
     @State var time = Timer.publish(every: 0.1, on: .current, in: .tracking).autoconnect()
     
-    let layout = [GridItem(.adaptive(minimum: 300))]
-    
-    
     @State private var showPaymentView = false
     @ObservedObject var viewModel: SummaryCollectionViewModel
     @ObservedObject var authViewModel = AuthViewModel(service: UserService(), uploader: ImageUploader())
@@ -30,15 +27,17 @@ struct SummaryCollectionView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
+                Color.theme.custombackg.ignoresSafeArea()
                 ScrollView {
                     VStack {
+                        //                    GeometryReader { g in
                         HStack {
                             Spacer()
                             VStack {
                                 KFImage(URL(string: viewModel.collection.collectionImageUrl))
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: UIDevice.isIPad ? 500 : UIScreen.main.bounds.width * 0.9, height: UIDevice.isIPad ? 400 : 200)
+                                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 200)
                                     .padding(.top, 50)
                                 
                                 
@@ -57,53 +56,30 @@ struct SummaryCollectionView: View {
                             Spacer()
                         }
                     
-                        if UIDevice.isIPad {
-                            VStack(spacing: 20) {
-                                Text("€ \(String(viewModel.collection.currentAmount.formatted(.number.precision(.fractionLength(0))))) raised of € \(String(viewModel.collection.amount.formatted(.number.precision(.fractionLength(0)))))")
+                        
+                        VStack {
+                            HStack {
+                                Text("€ \(String(viewModel.collection.currentAmount.formatted(.number.precision(.fractionLength(2))))) raised of € \(String(viewModel.collection.amount.formatted(.number.precision(.fractionLength(0)))))")
                                     .font(.subheadline)
                                     .fontWeight(.semibold)
-
-                                
-                                
-                                
-                                
-                                ProgressView(value: viewModel.collection.currentAmount/viewModel.collection.amount)
-                                    .scaleEffect(x: 1, y: 2)
-                                    .frame(width: 500)
-                                
-                                HStack{
-                                    Image(systemName: "person.2.fill")
-                                    Text("\(viewModel.collection.participants) donations")
-                                        .fontWeight(.regular)
-                                }
-                                
+                                Spacer()
                             }
                             
-                        } else {
-                            VStack {
-                                HStack {
-                                    Text("€ \(String(viewModel.collection.currentAmount.formatted(.number.precision(.fractionLength(0))))) raised of € \(String(viewModel.collection.amount.formatted(.number.precision(.fractionLength(0)))))")
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                    Spacer()
-                                }
-                                
-                                ProgressView(value: viewModel.collection.currentAmount/viewModel.collection.amount)
-                                    .scaleEffect(x: 1, y: 2)
-                                
-                                
-                                HStack{
-                                    Image(systemName: "person.2.fill")
-                                    Text("\(viewModel.collection.participants) donations")
-                                        .fontWeight(.regular)
-                                    Spacer()
-                                }
-                                .font(.subheadline)
-                                .padding(.top, 10)
-                                
+                            ProgressView(value: viewModel.collection.currentAmount/viewModel.collection.amount)
+                                .scaleEffect(x: 1, y: 2)
+                            
+                            
+                            HStack{
+                                Image(systemName: "person.2.fill")
+                                Text("\(viewModel.collection.participants) donations")
+                                    .fontWeight(.regular)
+                                Spacer()
                             }
-                            .padding(.horizontal)
+                            .font(.subheadline)
+                            .padding(.top, 10)
+                            
                         }
+                        .padding(.horizontal)
                         
                         Button() {
                             showPaymentView.toggle()
@@ -113,7 +89,7 @@ struct SummaryCollectionView: View {
                                 .fontWeight(.semibold)
                                 .frame(minWidth: 100, maxWidth: 250)
                                 .frame(height: 45)
-                                .background(.black)
+                                .background(Color(.systemBlue))
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                             
                         }
@@ -148,23 +124,17 @@ struct SummaryCollectionView: View {
                                     .fontWeight(.semibold)
                                 Spacer()
                             }
-                            if UIDevice.isIPad {
-                                LazyVGrid(columns: layout) {
-                                    ForEach(viewModel.payments) { payment in
-                                        ActivityCollectionView(payment: payment)
-                                    }
-                                }
-                            } else {
-                                ForEach(viewModel.payments) { payment in
-                                    ActivityCollectionView(payment: payment)
-                                }
+                            
+                            ForEach(viewModel.payments) { payment in
+                                ActivityCollectionView(payment: payment)
                             }
                             
                         }
                         .padding()
                         
                         
-                        Spacer().frame(height: 60)
+                        
+//                        Spacer()
                         
                     }
                     
@@ -213,7 +183,7 @@ struct SummaryCollectionView: View {
                         Button {
                             viewModel.collection.didLike ?? false ? viewModel.removeFromFavourite() : viewModel.addToFavourite()
                         } label: {
-                            Label(viewModel.collection.didLike ?? false ? "Remove from favourites" : "Add to favourites", systemImage: viewModel.collection.didLike ?? false ? "bookmark.fill" : "bookmark")
+                            Label(viewModel.collection.didLike ?? false ? "Remove to favourites" : "Add to favourites", systemImage: viewModel.collection.didLike ?? false ? "bookmark.fill" : "bookmark")
                         }
                         
                         
@@ -246,7 +216,6 @@ struct SummaryCollectionView: View {
                 }
                 
             }
-            
         }
         .navigationBarBackButtonHidden(true)
         .foregroundColor(.black)
