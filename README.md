@@ -1,5 +1,5 @@
 # Karma App
-This project has been developed for the "Design adn Implementation of Mobile Applications" course, attended at Politecnico di Milano.
+This project has been developed for the "Design and Implementation of Mobile Applications" course, attended at Politecnico di Milano.
 ## Description
 
 This project is a mobile application for iOS written in Swift that enables users to create a profile and raise money for fundraising campaigns they create.
@@ -29,10 +29,10 @@ Apple Push Notifications service has been integrated to create weekly reminders 
 - View Inspector
 
 ## Testing
-Tests were performred to ensure the application's correctness, including unit testing, integration testing, UI testing and acceptance testing, achieving a coverage higher than 80%
+Tests were performed to ensure the application's correctness, including unit testing, integration testing, UI testing and acceptance testing, achieving a coverage higher than 80%
 
 ## Group
-This project has been developed in pairs with: Giovanni Demasi
+This project has been developed in tandem with: Giovanni Demasi
 
 ## Documentation
 A complete documentation with all the features and functionalities is availabile in the [design document](https://github.com/Tommaso23/DIMA-Project/blob/master/design_document.pdf)
