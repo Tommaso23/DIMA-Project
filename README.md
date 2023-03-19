@@ -35,4 +35,4 @@ Tests were performred to ensure the application's correctness, including unit te
 This project has been developed in pairs with: Giovanni Demasi
 
 ## Documentation
-A complete documentation with all the features and functionalities is availabile in the 
+A complete documentation with all the features and functionalities is availabile in the [design document](https://github.com/Tommaso23/DIMA-Project/blob/master/design_document.pdf)
