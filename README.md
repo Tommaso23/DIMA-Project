@@ -4,7 +4,7 @@ This project has been developed for the "Design adn Implementation of Mobile App
 
 This project is a mobile application for iOS written in Swift that enables users to create a profile and raise money for fundraising campaigns they create.
 The application provides users with a user-friendly interface to create a fundraising campaign by entering the campaign details, such as the title, description, and fundraising goal. 
-The application allows users to track their progress towards the fundraising goal, including the total amount of donations received and the percentage of the goal achieved. Additionally, users can also view the list of donors.
+The application allows users to track their progress towards the fundraising goal, including the total amount of donations received and the percentage of the goal achieved. Additionally, users can also view the list of donors. The app Interface has been developed for both iPhone and iPad screen.
 
 ## Services
 For the realization of the application, several libraries and services have been used:
